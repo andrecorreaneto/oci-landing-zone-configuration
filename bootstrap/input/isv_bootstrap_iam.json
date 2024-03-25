@@ -4,13 +4,7 @@
             "BOOTSTRAP-TOP-CMP" : { 
                 "parent_id" : "ocid1.compartment.oc1..aaaaaaaa7wo67pnm5672hgnmkipwqx6c3pp2q4d2gixzz3doo33u733fuvmq",
                 "name" : "isv-blueprint-cmp", 
-                "description" : "ISV top compartment.",
-                "children" : {
-                    "BOOTSTRAP-CONFIG-CMP" : { 
-                        "name" : "isv-terraform-shared-config-cmp",
-                        "description" : "Compartment for Terraform automation configuration."
-                    }
-                }
+                "description" : "ISV top compartment."
             }  
         }
     },
@@ -58,25 +52,7 @@
                     "allow group isv-ops-iam-group, isv-ops-cred-group to read usage-reports in tenancy",
                     "allow group isv-ops-iam-group, isv-ops-cred-group to read objectstorage-namespaces in tenancy"
                 ]
-            },
-            "BOOTSTRAP-CONFIG-POLICY" : {
-                "name" : "isv-terraform-automation-config-policy",
-                "description" : "ISV Operations configuration policy.",
-                "compartment_id" : "BOOTSTRAP-TOP-CMP",                
-                "statements" : [
-                    "allow group isv-ops-iam-group to manage buckets in compartment isv-terraform-shared-config-cmp",
-                    "allow group isv-ops-iam-group to manage objects in compartment isv-terraform-shared-config-cmp where target.bucket.name = 'isv-terraform-shared-config-bucket'"
-                ]   
             }
-        }
-    },  
-    "object_storage_configuration" : {
-        "default_compartment_id" : "BOOTSTRAP-CONFIG-CMP",
-        "buckets" : {
-            "BOOTSTRAP-SHARED-CONFIG-BUCKET" : {
-                "compartment_id" : "BOOTSTRAP-CONFIG-CMP",
-                "name" : "isv-terraform-shared-config-bucket"
-            }    
         }
     }
 }  
