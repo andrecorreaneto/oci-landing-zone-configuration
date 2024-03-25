@@ -1,6 +1,6 @@
 {
     "compartments_configuration" : {
-        "default_parent_id" : "BOOTSTRAP-TOP-CMP",
+        "default_parent_id" : "TOP-CMP",
         "compartments" : {
             "MGMT-PLANE" : {
                 "name" : "isv-mgmt-plane-cmp",

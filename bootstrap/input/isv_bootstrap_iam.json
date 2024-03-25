@@ -1,7 +1,7 @@
 {
     "compartments_configuration" : {
         "compartments" : {
-            "BOOTSTRAP-TOP-CMP" : { 
+            "TOP-CMP" : { 
                 "parent_id" : "ocid1.compartment.oc1..aaaaaaaa7wo67pnm5672hgnmkipwqx6c3pp2q4d2gixzz3doo33u733fuvmq",
                 "name" : "isv-blueprint-cmp", 
                 "description" : "ISV top compartment."
