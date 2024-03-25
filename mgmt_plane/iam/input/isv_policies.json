@@ -37,7 +37,7 @@
             "NETWORK" : {
                 "name" : "isv-mgmt-plane-network-policy",
                 "description" : "Management plane network policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-network-grp to manage virtual-network-family in compartment isv-mgmt-plane-cmp:isv-network-cmp",
                   "allow group isv-ops-network-grp to manage drgs in compartment isv-mgmt-plane-cmp:isv-network-cmp",
@@ -55,7 +55,7 @@
             "SECURITY" : {
                 "name" : "isv-mgmt-plane-security-policy",
                 "description" : "Management plane security policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-security-grp to manage instance-family in compartment isv-mgmt-plane-cmp:isv-logging-cmp",
                   "allow group isv-ops-security-grp to manage volume-family in compartment isv-mgmt-plane-cmp:isv-logging-cmp",
@@ -82,7 +82,7 @@
               "SHARED-SERVICES" : {
                 "name" : "isv-mgmt-plane-shared-services-policy",
                 "description" : "Management plane shared services policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-security-grp to manage instance-family in compartment isv-mgmt-plane-cmp:isv-logging-cmp",
                   "allow group isv-ops-security-grp to manage volume-family in compartment isv-mgmt-plane-cmp:isv-logging-cmp",
@@ -109,7 +109,7 @@
               "CUSTOMERS" : {
                 "name" : "isv-ops-customers-policy",
                 "description" : "Customer operations policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-customers-grp to manage compartments in compartment isv-customers-cmp", 
                   "allow group isv-ops-customers-grp to manage policies in compartment isv-customers-cmp",
@@ -147,7 +147,7 @@
               "SNOWFLAKE-CUSTOMERS" : {
                 "name" : "isv-ops-snowflake-customers-policy",
                 "description" : "Snowflake customer operations policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-snowflake-customers-grp to manage compartments in compartment isv-snowflake-customers-cmp", 
                   "allow group isv-ops-snowflake-customers-grp to manage policies in compartment isv-snowflake-customers-cmp",
@@ -183,7 +183,7 @@
               "CUSTOMER-OPS-ON-MGMT" : {
                 "name" : "isv-customer-ops-on-mgmt-plane-policy",
                 "description" : "Customer operations on management plane policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-customers-grp to use vaults in compartment isv-mgmt-plane-cmp:isv-logging-cmp",
                   "allow group isv-ops-customers-grp to use drg-object in compartment isv-mgmt-plane-cmp:isv-network-cmp",
@@ -198,7 +198,7 @@
             "CONFIG" : {
                 "name" : "isv-ops-config-policy",
                 "description" : "Operations configuration policy.",
-                "compartment_id" : "TOP-CMP",
+                "compartment_id" : "BOOTSTRAP-TOP-CMP",
                 "statements" : [
                   "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to read buckets in compartment isv-terraform-shared-config-cmp",
                   "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to manage objects in compartment isv-terraform-shared-config-cmp where target.bucket.name = 'isv-terraform-shared-config-bucket'"
