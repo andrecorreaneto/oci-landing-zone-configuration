@@ -1,7 +1,7 @@
 {
   "network_configuration" : {
     "default_enable_cis_checks" : true,
-    "default_compartment_id" : "SHARED-NETWORK",
+    "default_compartment_id" : "SHARED-NETWORK-CMP",
 
     "network_configuration_categories" : {
       "production" : {
@@ -35,7 +35,7 @@
                 "prohibit_internet_ingress"  : true,
                 "prohibit_public_ip_on_vnic" : true,
                 "route_table_key"            : "OUTDOOR-SUB-ROUTE",
-                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL"],
+                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL"]
               },
               "INDOOR-SUB" : {
                 "cidr_block"                 : "192.168.0.32/28",
@@ -46,7 +46,7 @@
                 "prohibit_internet_ingress"  : true,
                 "prohibit_public_ip_on_vnic" : true,
                 "route_table_key"            : "INDOOR-SUB-ROUTE",
-                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL"],
+                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL"]
               },
               "MGMT-SUB" : {
                 "cidr_block"                 : "192.168.0.48/28",
@@ -258,7 +258,7 @@
                     "description"  : "Ingress from ISV on-premises",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 80,
                     "dst_port_max" : 80
@@ -410,7 +410,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
@@ -450,7 +450,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
@@ -490,7 +490,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
@@ -538,7 +538,7 @@
                 "prohibit_internet_ingress"  : true,
                 "prohibit_public_ip_on_vnic" : true,
                 "route_table_key"            : "SHARED-SERVICES-VCN-MID-SUB-ROUTE",
-                "security_list_keys"         : ["SHARED-SERVICES-VCN-SL"],
+                "security_list_keys"         : ["SHARED-SERVICES-VCN-SL"]
               },
               "SHARED-SERVICES-VCN-BACK-SUB" : {
                 "cidr_block"                 : "192.168.0.160/28",
@@ -630,7 +630,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
@@ -670,7 +670,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
@@ -710,7 +710,7 @@
                     "description"  : "Ingress from on-prem on SSH port 22.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
-                    "src"          : "160.34.115.52/32",
+                    "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
                     "dst_port_min" : 22,
                     "dst_port_max" : 22
