@@ -1,7 +1,7 @@
 {
     "policies_configuration" : {
         "supplied_policies" : {
-            "ROOT" : {
+            "ROOT-POLICY" : {
                 "name" : "isv-root-policy",
                 "description" : "Root compartment policy.",
                 "compartment_id" : "TENANCY-ROOT",
@@ -34,7 +34,7 @@
                   "allow group isv-auditors-grp to read data-safe-family in tenancy"
                 ]
             },
-            "NETWORK" : {
+            "NETWORK-POLICY" : {
                 "name" : "isv-mgmt-plane-network-policy",
                 "description" : "Management plane network policy.",
                 "compartment_id" : "TOP-CMP",
@@ -52,7 +52,7 @@
                   "allow group isv-ops-network-grp to use vaults in compartment isv-mgmt-plane-cmp:isv-logging-cmp"
                 ]            
             },
-            "SECURITY" : {
+            "SECURITY-POLICY" : {
                 "name" : "isv-mgmt-plane-security-policy",
                 "description" : "Management plane security policy.",
                 "compartment_id" : "TOP-CMP",
@@ -79,7 +79,7 @@
                   "allow group isv-ops-security-grp to read repos in compartment isv-mgmt-plane-cmp"
                 ]            
               },
-              "SHARED-SERVICES" : {
+              "SHARED-SERVICES-POLICY" : {
                 "name" : "isv-mgmt-plane-shared-services-policy",
                 "description" : "Management plane shared services policy.",
                 "compartment_id" : "TOP-CMP",
@@ -106,7 +106,7 @@
                   "allow group isv-ops-security-grp to read repos in compartment isv-mgmt-plane-cmp"
                 ]            
               },
-              "CUSTOMERS" : {
+              "CUSTOMERS-POLICY" : {
                 "name" : "isv-ops-customers-policy",
                 "description" : "Customer operations policy.",
                 "compartment_id" : "TOP-CMP",
@@ -144,7 +144,7 @@
                   "allow group isv-ops-network-grp to read drg-attachment in compartment isv-customers-cmp"
                 ]            
               },
-              "SNOWFLAKE-CUSTOMERS" : {
+              "SNOWFLAKE-CUSTOMERS-POLICY" : {
                 "name" : "isv-ops-snowflake-customers-policy",
                 "description" : "Snowflake customer operations policy.",
                 "compartment_id" : "TOP-CMP",
@@ -180,7 +180,7 @@
                   "allow group isv-ops-snowflake-customers-grp to use key-delegate in compartment isv-snowflake-customers-cmp"
                 ]            
               },
-              "CUSTOMER-OPS-ON-MGMT" : {
+              "CUSTOMER-OPS-ON-MGMT-POLICY" : {
                 "name" : "isv-customer-ops-on-mgmt-plane-policy",
                 "description" : "Customer operations on management plane policy.",
                 "compartment_id" : "TOP-CMP",
@@ -195,16 +195,7 @@
                   "allow group isv-ops-snowflake-customers-grp to manage drg-route-distribution in compartment isv-mgmt-plane-cmp:isv-network-cmp"
                 ]  
             },
-            "CONFIG" : {
-                "name" : "isv-ops-config-policy",
-                "description" : "Operations configuration policy.",
-                "compartment_id" : "TOP-CMP",
-                "statements" : [
-                  "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to read buckets in compartment isv-terraform-shared-config-cmp",
-                  "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to manage objects in compartment isv-terraform-shared-config-cmp where target.bucket.name = 'isv-terraform-shared-config-bucket'"
-                ]
-            },
-            "OCI-SERVICES" : {
+            "OCI-SERVICES-POLICY" : {
                 "name" : "isv-oci-services-policy",
                 "description" : "OCI services policy.",
                 "compartment_id" : "TENANCY-ROOT",
