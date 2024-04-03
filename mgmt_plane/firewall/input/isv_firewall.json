@@ -1,6 +1,6 @@
 {
   "instances_configuration" : {
-    "default_compartment_id" : "SHARED-NETWORK",
+    "default_compartment_id" : "SHARED-NETWORK-CMP",
     "default_ssh_public_key_path" : "~/.ssh/id_rsa.pub",
     "instances" : {
       "INSTANCE-1" : {

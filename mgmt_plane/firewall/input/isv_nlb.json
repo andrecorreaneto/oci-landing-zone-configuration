@@ -1,6 +1,6 @@
 {
   "nlb_configuration" : {
-    "default_compartment_id" : "SHARED-NETWORK",
+    "default_compartment_id" : "SHARED-NETWORK-CMP",
     "nlbs" : {
       "INDOOR-NLB" : {
         "display_name" : "isv-indoor-nlb",
