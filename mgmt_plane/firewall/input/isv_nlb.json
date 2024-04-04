@@ -8,7 +8,7 @@
         "subnet_id" : "INDOOR-SUB",
         "listeners" : {
           "LISTENER-1" : {
-            "port" : 80,
+            "port" : 443,
             "protocol" : "TCP",
             "backend_set" : {
               "name" : "default-backend-set",
@@ -18,12 +18,12 @@
               "backends" : {
                 "BACKEND-1" : {
                   "name" : "backend-1",
-                  "port" : 80,
+                  "port" : 443,
                   "ip_address" : "INSTANCE-1.INDOOR"
                 },
                 "BACKEND-2" : {
                   "name" : "backend-2",
-                  "port" : 80,
+                  "port" : 443,
                   "ip_address" : "INSTANCE-2.INDOOR"
                 }
               }
@@ -37,7 +37,7 @@
         "subnet_id" : "LBR-SUB",
         "listeners" : {
           "LISTENER-1" : {
-            "port" : 80,
+            "port" : 443,
             "protocol" : "TCP",
             "backend_set" : {
               "name" : "default-backend-set",
@@ -47,12 +47,12 @@
               "backends" : {
                 "BACKEND-1" : {
                   "name" : "backend-1",
-                  "port" : 80,
+                  "port" : 443,
                   "ip_address" : "INSTANCE-1.OUTDOOR"
                 },
                 "BACKEND-2" : {
                   "name" : "backend-2",
-                  "port" : 80,
+                  "port" : 443,
                   "ip_address" : "INSTANCE-2.OUTDOOR"
                 }
               }
