@@ -89,7 +89,7 @@
                     "icmp_type"    : 3,
                     "icmp_code"    : 4
                   }
-                ],,
+                ],
                 "egress_rules" : [
                   {
                     "description"  : "Egress to Mgmt subnet on SSH port",
