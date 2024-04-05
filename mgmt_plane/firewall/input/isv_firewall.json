@@ -3,7 +3,7 @@
     "default_compartment_id" : "SHARED-NETWORK-CMP",
     "instances" : {
       "PANF-1" : {
-        "name"  : "palo-alto-fw-1",
+        "name"  : "panf-1",
         "shape" : "VM.Optimized3.Flex",
         "flex_shape_settings" : {
           "memory" : 56,
@@ -23,20 +23,20 @@
           "measured_boot" : true
         },
         "networking" : {
-          "hostname " : "palo-alto-fw-1",
+          "hostname " : "panf-1",
           "subnet_id" : "MGMT-SUB",
           "network_security_groups" : ["MGMT-NSG"],
           "secondary_vnics" : {
             "INDOOR" : {
-              "display_name" : "palo-alto-fw-1-indoor",
-              "hostname" : "palo-alto-fw-1-indoor",
+              "display_name" : "panf-1-indoor",
+              "hostname" : "panf-1-indoor",
               "subnet_id" : "INDOOR-SUB",
               "network_security_groups" : ["INDOOR-FW-NSG"],
               "skip_source_dest_check" : true
             },
             "OUTDOOR" : {
-              "display_name" : "palo-alto-fw-1-outdoor",
-              "hostname" : "palo-alto-fw-1-outdoor",
+              "display_name" : "panf-1-outdoor",
+              "hostname" : "panf-1-outdoor",
               "subnet_id" : "OUTDOOR-SUB",
               "network_security_groups" : ["OUTDOOR-FW-NSG"],
               "skip_source_dest_check" : true
@@ -49,7 +49,7 @@
         }
       },
       "PANF-2" : {
-        "name" : "palo-alto-fw-2",
+        "name" : "panf-2",
         "shape" : "VM.Optimized3.Flex",
         "flex_shape_settings" : {
           "memory" : 56,
@@ -69,20 +69,20 @@
           "measured_boot" : true
         },
         "networking" : {
-          "hostname " : "palo-alto-fw-2",
+          "hostname " : "panf-2",
           "subnet_id" : "MGMT-SUB",
           "network_security_groups" : ["MGMT-NSG"],
           "secondary_vnics" : {
             "INDOOR" : {
-              "display_name" : "palo-alto-fw-2-indoor",
-              "hostname" : "palo-alto-fw-2-indoor",
+              "display_name" : "panf-2-indoor",
+              "hostname" : "panf-2-indoor",
               "subnet_id" : "INDOOR-SUB",
               "network_security_groups" : ["INDOOR-FW-NSG"],
               "skip_source_dest_check" : true
             },
             "OUTDOOR" : {
-              "display_name" : "palo-alto-fw-2-outdoor",
-              "hostname" : "palo-alto-fw-2-outdoor",
+              "display_name" : "panf-2-outdoor",
+              "hostname" : "panf-2-outdoor",
               "subnet_id" : "OUTDOOR-SUB",
               "network_security_groups" : ["OUTDOOR-FW-NSG"],
               "skip_source_dest_check" : true
