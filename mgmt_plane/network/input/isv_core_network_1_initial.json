@@ -57,7 +57,7 @@
                 "prohibit_internet_ingress"  : true,
                 "prohibit_public_ip_on_vnic" : true,
                 "route_table_key"            : "MGMT-SUB-ROUTE",
-                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL","MGMT-SUB-SL"]
+                "security_list_keys"         : ["MGMT-SUB-SL"]
               }
             },
 
@@ -79,7 +79,17 @@
               },
               "MGMT-SUB-SL" : {
                 "display_name" : "mgmt-sub-sl",
-                "ingress_rules" : [],
+                "ingress_rules" : [
+                  {
+                    "description"  : "Ingress on UDP type 3 code 4.",
+                    "stateless"    : false,
+                    "protocol"     : "UDP",
+                    "src"          : "0.0.0.0/0",
+                    "src_type"     : "CIDR_BLOCK",
+                    "icmp_type"    : 3,
+                    "icmp_code"    : 4
+                  }
+                ],,
                 "egress_rules" : [
                   {
                     "description"  : "Egress to Mgmt subnet on SSH port",
