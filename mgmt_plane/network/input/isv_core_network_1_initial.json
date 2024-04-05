@@ -82,11 +82,22 @@
                 "ingress_rules" : [],
                 "egress_rules" : [
                   {
-                    "description"  : "Egress to Mgmt subnet on all ports",
+                    "description"  : "Egress to Mgmt subnet on SSH port",
                     "stateless"    : false,
                     "protocol"     : "TCP",
                     "dst"          : "192.168.0.48/28",
-                    "dst_type"     : "CIDR_BLOCK"
+                    "dst_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : "22",
+                    "dst_port_max" : "22"
+                  },
+                  {
+                    "description"  : "Egress to Mgmt subnet on HTTP port",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "dst"          : "192.168.0.48/28",
+                    "dst_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : "443",
+                    "dst_port_max" : "443"
                   }
                 ]
               }
