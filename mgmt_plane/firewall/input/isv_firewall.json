@@ -107,6 +107,7 @@
           "preserve_on_instance_deletion" : false
         },
         "networking" : {
+          "assign_public_ip" : true,
           "hostname " : "bastion-host",
           "subnet_id" : "LBR-SUB",
           "network_security_groups" : ["BASTION-NSG"]
