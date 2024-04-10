@@ -1,7 +1,7 @@
 {
   "network_configuration" : {
     "default_enable_cis_checks" : true,
-    "default_compartment_id"    : "CUSTOMER-1",
+    "default_compartment_id"    : "CUSTOMER-1-CMP",
     "network_configuration_categories" : {
       "production" : {
         "vcns" : {
