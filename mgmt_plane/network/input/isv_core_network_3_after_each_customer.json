@@ -57,7 +57,7 @@
                 "prohibit_internet_ingress"  : true,
                 "prohibit_public_ip_on_vnic" : true,
                 "route_table_key"            : "MGMT-SUB-ROUTE",
-                "security_list_keys"         : ["CENTRAL-HUB-VCN-SL"]
+                "security_list_keys"         : ["MGMT-SUB-SL"]
               }
             },
 
@@ -76,6 +76,40 @@
                   }
                 ],
                 "egress_rules" : []
+              },
+              "MGMT-SUB-SL" : {
+                "display_name" : "mgmt-sub-sl",
+                "ingress_rules" : [
+                  {
+                    "description"  : "Ingress on UDP type 3 code 4.",
+                    "stateless"    : false,
+                    "protocol"     : "UDP",
+                    "src"          : "0.0.0.0/0",
+                    "src_type"     : "CIDR_BLOCK",
+                    "icmp_type"    : 3,
+                    "icmp_code"    : 4
+                  }
+                ],
+                "egress_rules" : [
+                  {
+                    "description"  : "Egress to Mgmt subnet on SSH port. Required by Bastion port forwarding session.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "dst"          : "192.168.0.48/28",
+                    "dst_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : "22",
+                    "dst_port_max" : "22"
+                  },
+                  {
+                    "description"  : "Egress to Mgmt subnet on HTTP port. Required by Bastion port forwarding session.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "dst"          : "192.168.0.48/28",
+                    "dst_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : "443",
+                    "dst_port_max" : "443"
+                  }
+                ]
               }
             },
 
@@ -269,14 +303,76 @@
               "MGMT-NSG" : {
                 "display_name" : "mgmt-nsg",
                 "ingress_rules" : {
-                  "FROM-ISV-ONPREM" : {
-                    "description"  : "Ingress from ISV on-premises",
+                  "FROM-EXTERNAL-HTTP" : {
+                    "description"  : "Ingress from external address to HTTP port. Allows inbound access for on-prem IP addresses.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
                     "src"          : "189.6.81.101/32",
                     "src_type"     : "CIDR_BLOCK",
-                    "dst_port_min" : 80,
-                    "dst_port_max" : 80
+                    "dst_port_min" : 443,
+                    "dst_port_max" : 443
+                  },
+                  "FROM-EXTERNAL-SSH" : {
+                    "description"  : "Ingress from external address to SSH port. Allows inbound access for on-prem IP addresses.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "src"          : "189.6.81.101/32",
+                    "src_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : 22,
+                    "dst_port_max" : 22
+                  },
+                  "FROM-BASTION-NSG-SSH" : {
+                    "description"  : "Ingress from bastion NSG to SSH port. Required by hosts deployed in the bastion NSG.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "src"          : "BASTION-NSG",
+                    "src_type"     : "NETWORK_SECURITY_GROUP",
+                    "dst_port_min" : 22,
+                    "dst_port_max" : 22
+                  },
+                  "FROM-MGMT-SUBNET-SSH" : {
+                    "description"  : "Ingress from Mgmt subnet to SSH port. Required by Bastion port forwarding session.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "src"          : "192.168.0.48/28",
+                    "src_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : 22,
+                    "dst_port_max" : 22
+                  },
+                  "FROM-MGMT-SUBNET-HTTP" : {
+                    "description"  : "Ingress from Mgmt subnet to HTTP port. Required by Bastion port forwarding session.",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "src"          : "192.168.0.48/28",
+                    "src_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : 443,
+                    "dst_port_max" : 443
+                  }
+                }
+              },
+
+              "BASTION-NSG" : {
+                "display_name" : "bastion-nsg",
+                "ingress_rules" : {
+                  "FROM-EXTERNAL-SSH" : {
+                    "description"  : "Ingress from external address to SSH port",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "src"          : "189.6.81.101/32",
+                    "src_type"     : "CIDR_BLOCK",
+                    "dst_port_min" : 22,
+                    "dst_port_max" : 22
+                  }
+                },
+                "egress_rules" : {
+                  "TO-MGMT-NSG-SSH" : {
+                    "description"  : "Egress to Mgmt NSG",
+                    "stateless"    : false,
+                    "protocol"     : "TCP",
+                    "dst"          : "MGMT-NSG",
+                    "dst_type"     : "NETWORK_SECURITY_GROUP",
+                    "dst_port_min" : 22,
+                    "dst_port_max" : 22
                   }
                 }
               }

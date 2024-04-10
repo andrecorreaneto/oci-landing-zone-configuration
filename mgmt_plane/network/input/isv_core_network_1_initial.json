@@ -92,7 +92,7 @@
                 ],
                 "egress_rules" : [
                   {
-                    "description"  : "Egress to Mgmt subnet on SSH port",
+                    "description"  : "Egress to Mgmt subnet on SSH port. Required by Bastion port forwarding session.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
                     "dst"          : "192.168.0.48/28",
@@ -101,7 +101,7 @@
                     "dst_port_max" : "22"
                   },
                   {
-                    "description"  : "Egress to Mgmt subnet on HTTP port",
+                    "description"  : "Egress to Mgmt subnet on HTTP port. Required by Bastion port forwarding session.",
                     "stateless"    : false,
                     "protocol"     : "TCP",
                     "dst"          : "192.168.0.48/28",
