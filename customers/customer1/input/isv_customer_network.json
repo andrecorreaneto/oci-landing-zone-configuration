@@ -72,7 +72,7 @@
                 "display_name" : "front-sub-route",
                 "route_rules" : {
                   "DRG-RULE" : {
-                    "network_entity_id" : "CENTRAL-HUB-DRG",
+                    "network_entity_key" : "CENTRAL-HUB-DRG",
                     "description"        : "To DRG.",
                     "destination"        : "0.0.0.0/0",
                     "destination_type"   : "CIDR_BLOCK"
@@ -83,7 +83,7 @@
                 "display_name" : "mid-sub-route",
                 "route_rules" : {
                   "DRG-RULE" : {
-                    "network_entity_id" : "CENTRAL-HUB-DRG",
+                    "network_entity_key" : "CENTRAL-HUB-DRG",
                     "description"        : "To DRG.",
                     "destination"        : "0.0.0.0/0",
                     "destination_type"   : "CIDR_BLOCK"
@@ -94,7 +94,7 @@
                 "display_name" : "back-sub-route",
                 "route_rules" : {
                   "DRG-RULE" : {
-                    "network_entity_id" : "CENTRAL-HUB-DRG",
+                    "network_entity_key" : "CENTRAL-HUB-DRG",
                     "description"        : "To DRG.",
                     "destination"        : "0.0.0.0/0",
                     "destination_type"   : "CIDR_BLOCK"
