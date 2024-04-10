@@ -251,7 +251,8 @@
                       "match_criteria" : {
                         "match_type" : "DRG_ATTACHMENT_ID",
                         "attachment_type" : "VCN",
-                        "drg_attachment_id" : "ocid1.drgattachment.oc1.phx.aaaaaaaaie2sgsctuw2qc5dazhczrtgk6oen4ixati2lugng5o4ejfdcetwa"
+                        "drg_attachment_key" : "CENTRAL-HUB-VCN-ATTACH"
+                      }
                       }
                     }
                   }
