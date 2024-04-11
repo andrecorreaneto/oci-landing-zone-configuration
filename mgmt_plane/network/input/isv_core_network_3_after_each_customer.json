@@ -165,7 +165,7 @@
                   },
                   "TO-CUSTOMER-1-VCN-RULE" : {
                     "description"        : "To DRG.",
-                    "destination"        : "<REPLACE-WITH-CUSTOMER-1-VCN-CIDR-BLOCK>",
+                    "destination"        : "10.0.0.0/25",
                     "destination_type"   : "CIDR_BLOCK",
                     "network_entity_key" : "CENTRAL-HUB-DRG"
                   }
@@ -197,7 +197,7 @@
                     "description"        : "All traffic goes to NLB.",
                     "destination"        : "0.0.0.0/0",
                     "destination_type"   : "CIDR_BLOCK",
-                    "network_entity_id"  : "<REPLACE-WITH-NLB-PRIVATE-IP-OCID>"
+                    "network_entity_key"  : "INDOOR-NLB"
                   }
                 }
               }
@@ -915,7 +915,7 @@
                       "match_criteria" : {
                         "match_type" : "DRG_ATTACHMENT_ID",
                         "attachment_type" : "VCN",
-                        "drg_attachment_id" : "<REPLACE-WITH-CUSTOMER-1-VCN-ATTACH-OCID>"
+                        "drg_attachment_key" : "CUSTOMER-1-VCN-ATTACH"
                       }
                     }
   

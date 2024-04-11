@@ -225,7 +225,7 @@
             "CENTRAL-HUB-INJECT" : {
               "drg_id" : "CENTRAL-HUB-DRG",
               "drg_attachments" : {
-                "VCN-ATTACH" : {
+                "CUSTOMER-1-VCN-ATTACH" : {
                   "display_name" : "customer-1-vcn-attachment",
                   "drg_route_table_key" : "DRG-ROUTE",
                   "network_details" : {
