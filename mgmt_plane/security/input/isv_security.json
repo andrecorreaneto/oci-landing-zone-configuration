@@ -1,6 +1,5 @@
 {
     "cloud_guard_configuration" : {
-        "tenancy_ocid" : "TENANCY-ROOT",
         "targets" : {
             "ROOT-CLOUD-GUARD-TARGET" : {
                 "name" : "isv-cloud-guard-target",
