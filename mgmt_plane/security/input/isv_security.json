@@ -38,29 +38,6 @@
                 "name" : "isv-all-containers-recipe",
                 "image_count" : 1
             }
-        },
-        "container_targets" : {
-            "NETWORK-CMP-CONTAINER-TARGET" : {
-                "name" : "isv-shared-network-container-target",
-                "target_registry" : {
-                    "compartment_id" : "SHARED-NETWORK-CMP"
-                },
-                "container_recipe_id" : "ALL-CONTAINERS-RECIPE" 
-            },
-            "LOGGING-CMP-CONTAINER-TARGET" : {
-                "name" : "isv-shared-logging-container-target",
-                "target_registry" : {
-                    "compartment_id" : "SHARED-LOGGING-CMP"
-                },
-                "container_recipe_id" : "ALL-CONTAINERS-RECIPE" 
-            },
-            "SHARED-SERVICES-CMP-CONTAINER-TARGET" : {
-                "name" : "isv-shared-services-container-target",
-                "target_registry" : {
-                    "compartment_id" : "SHARED-SERVICES-CMP"
-                },
-                "container_recipe_id" : "ALL-CONTAINERS-RECIPE" 
-            }
         }
     }
 }  
