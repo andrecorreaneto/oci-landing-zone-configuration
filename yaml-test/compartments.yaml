@@ -1,6 +1,6 @@
 compartments_configuration:
   enable_delete: true
-  default_compartment_id: "TENANCY-ROOT"
+  default_compartment_id: TENANCY-ROOT
   compartments:
     CMP-NETWORK-KEY:
       name: cmp-network
