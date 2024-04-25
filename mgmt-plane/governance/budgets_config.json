@@ -1,0 +1,16 @@
+{
+    "budgets_configuration" : {
+        "budgets" : {
+            "ROOT-BUDGET" : {
+                "name" : "isv-root-budget",
+                "description" : "Tenancy level budget.",
+                "amount" : 10000,
+                "alert_rule" : {
+                    "threshold_value" : 80,
+                    "recipients" : "email.address@example.com",
+                    "message" : "Actual spending goes above 80% of configured budget."
+                }
+            }    
+        }    
+    }
+}

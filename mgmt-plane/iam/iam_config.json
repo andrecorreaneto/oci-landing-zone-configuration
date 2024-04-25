@@ -1,4 +1,67 @@
 {
+    "compartments_configuration" : {
+        "default_parent_id" : "TOP-CMP",
+        "compartments" : {
+            "MGMT-PLANE-CMP" : {
+                "name" : "isv-mgmt-plane-cmp",
+                "description" : "Management Plane compartment.",
+                "children" : {
+                    "SHARED-NETWORK-CMP" : {
+                        "name" : "isv-network-cmp",
+                        "description" : "Shared customer network compartment."
+                    },
+                    "SHARED-LOGGING-CMP" : {
+                        "name" : "isv-logging-cmp",
+                        "description" : "Shared logging compartment."
+                    },
+                    "SHARED-SERVICES-CMP" : {
+                        "name" : "isv-shared-services-cmp",
+                        "description" : "Shared services compartment."
+                    }
+                }
+            },
+            "CUSTOMERS-CMP" : {
+                "name" : "isv-customers-cmp",
+                "description" : "Customers enclosing compartment."
+            },
+            "SNOWFLAKE-CUSTOMERS-CMP" : {
+                "name" : "isv-snowflake-customers-cmp",
+                "description" : "Snowflake customers enclosing compartment."
+            }        
+        }
+    },
+    "groups_configuration" : {
+        "groups" : {
+            "NETWORK-GROUP" : {
+                "name" : "isv-ops-network-grp",
+                "description" : "ISV Network operations group."
+            },
+            "SECURITY-GROUP" : {
+                "name" : "isv-ops-security-grp",
+                "description" : "ISV Security operations group."
+            },
+            "SHARED-SERVICES-GROUP" : {
+                "name" : "isv-ops-shared-services-grp",
+                "description" : "ISV Shared Services operations group."
+            },
+            "GOVERNANCE-GROUP" : {
+                "name" : "isv-ops-governance-grp",
+                "description" : "ISV Governance operations group."
+            },
+            "CUSTOMERS-GROUP" : {
+                "name" : "isv-ops-customers-grp",
+                "description" : "ISV Customers operations group."
+            },
+            "SNOWFLAKE-CUSTOMERS-GROUP" : {
+                "name" : "isv-ops-snowflake-customers-grp",
+                "description" : "ISV Snowflake Customers operations group."
+            },
+            "AUDITORS-GROUP" : {
+                "name" : "isv-auditors-grp",
+                "description" : "ISV auditors group."
+            }
+        }
+    },
     "policies_configuration" : {
         "supplied_policies" : {
             "ROOT-POLICY" : {

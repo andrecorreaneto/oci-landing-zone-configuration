@@ -1,14 +1,4 @@
 {
-    "cloud_guard_configuration" : {
-        "targets" : {
-            "ROOT-CLOUD-GUARD-TARGET" : {
-                "name" : "isv-cloud-guard-target",
-                "resource_id" : "TENANCY-ROOT",
-                "use_cloned_recipes" : true
-            }
-        }
-    },
-    
     "scanning_configuration" : {
         "default_compartment_id" : "SHARED-LOGGING-CMP",
         "host_recipes" : {
