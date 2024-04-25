@@ -1,4 +1,5 @@
 token
 **/isv_*.json
 **/input
-**/output
+**/iam/output
+**/network/output
