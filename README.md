@@ -65,6 +65,12 @@ The [OCI Landing Zones Orchestrator](https://github.com/oracle-quickstart/terraf
 - [Observability & Monitoring](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-observability)
 - [Secure Workloads](https://github.com/oracle-quickstart/terraform-oci-secure-workloads)
 
+The table below leads to the creation of the respective RMS (Resource Manager Service) stacks. The stack variables are all pre-filled with configuration files available in this repository, along with all required dependencies for each stack. The dependencies are stored in an OCI private Object Storage bucket.
 
-Click [![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables=%7B%22input_config_files_urls%22:%22https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json%22%7D%2C%7B%22url_dependency_source_oci_bucket%22:%22isv-terraform-runtime-bucket%22%7D%2C%7B%22url_dependency_source_oci_objects%22:%22bootstrap/compartments_output.json%22%7D%2C%7B%22save_output%22:%22true%22%7D%2C%7B%22oci_object_prefix%22:%22iam/output/%22%7D%2C%7B%22url_dependency_source%22:%22ocibucket%22%7D)
+Stack | Deploy Button
+------|---------------
+**Management plane foundational stack** | [![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"bootstrap/compartments_output.json","save_output":true,"oci_object_prefix":"iam/output"})
+**Management plane network stack** |
+**Management plane firewall stack** | 
+**Customer stacks** | 
 
