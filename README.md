@@ -4,7 +4,7 @@
 
 This repository contains the configuration files for OCI ISV Landing Zone Architecture POD Model Blueprint, which is based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. In the POD model, each ISV customer gets its own copy of the application.
 
-The architecture diagram below depicts the single tenancy blueprint, clearly separating the ISV management plane (magenta color) from ISV customers (grey and dark pink colors) compartments.
+The architecture diagram below depicts the single tenancy blueprint, clearly separating the ISV management plane (red color) from ISV customers (blue and grey) compartments.
 
 ### Management Plane
 
@@ -54,9 +54,11 @@ As a rule of thumb, it is advisable to separate management place stacks from cus
 3. **Management plane firewall stack**: composed by *firewall_config.json*, after which the Management plane network stack must be updated with *network_post_firewall_config.json*.
 4. **Customer stacks**: composed by *customer?_config.json*, after which the Management plane network stack must be updated with *network_post_each_customer_config.json*.
 
+These configuration files are designed to be used as templates, owned and modified at will by customers that are deploying the model. 
+
 ### The OCI Landing Zones Orchestrator
 
-The [OCI Landing Zones Orchestrator](https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator) is the tool for deploying JSON-based landing zones. The orchestrator also supports YAML documents or Terraform tfvars files with HCL (Hashicorp Language) objects. The only requirement is that the documents/HCL objects are defined according to the requirements and specifications set forth by the OCI Landing Zone core modules, that are available in the following repositories:
+The [OCI Landing Zones Orchestrator](https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator) is a convenience tool for deploying JSON-based landing zones. It also supports YAML documents or Terraform tfvars files with HCL (Hashicorp Language) objects. The only requirement is that the documents/HCL objects are defined according to the requirements and specifications set forth by the OCI Landing Zone core modules, that are available in the following repositories:
 
 - [Identity & Access Management](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam)
 - [Networking](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-networking)
@@ -65,12 +67,21 @@ The [OCI Landing Zones Orchestrator](https://github.com/oracle-quickstart/terraf
 - [Observability & Monitoring](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-observability)
 - [Secure Workloads](https://github.com/oracle-quickstart/terraform-oci-secure-workloads)
 
-The table below leads to the creation of the respective RMS (Resource Manager Service) stacks. The stack variables are all pre-filled with configuration files available in this repository, along with all required dependencies for each stack. The dependencies are stored in an OCI private Object Storage bucket.
+Next we show how the whole blueprint is deployed as a composite configuration of the aforementioned stacks.
 
-Stack | Deploy Button
-------|---------------
-**Management plane foundational stack** | [![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"bootstrap/compartments_output.json","save_output":true,"oci_object_prefix":"iam/output"})
-**Management plane network stack** |
-**Management plane firewall stack** | 
-**Customer stacks** | 
+### Management Plane Foundational Stack Deployment
+
+The foundational stack joins IAM, Security and Observability resources in a single configuration. As mentioned before, it can be further split depending on deployment requirements. 
+
+Click the button below to deploy the stack with the OCI Landing Zones Orchestrator. The variables are all pre-filled with configuration files available in this repository, along with all required dependencies, stored in an OCI private Object Storage bucket.
+
+[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"bootstrap/compartments_output.json","save_output":true,"oci_object_prefix":"iam/output"})
+
+![isv-pod-architecture-mgmt-plane-foundational](images/isv-pod-architecture-mgmt-plane-foundational.png)
+
+### Management Plane Network Stack Deployment
+
+### Management Plane Firewall Stack Deployment
+
+### Customer Stacks Deployment
 
