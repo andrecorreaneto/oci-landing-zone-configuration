@@ -1,22 +1,22 @@
-# ISV Landing Zone Architecture POD Model Blueprint
+# SaaS Landing Zone Architecture POD Model Blueprint
 
 ## Introduction
 
-This repository contains the configuration files for OCI ISV Landing Zone Architecture POD Model Blueprint, which is based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. In the POD model, each ISV customer gets its own copy of the application.
+This repository contains the configuration files for OCI Software as a Service (SaaS) Vendor Landing Zone Architecture Pod Model Blueprint, which is based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. This Blueprint is designed for SaaS vendors to be able to on board OCI in a streamlined manner that aligns to the CIS OCI OCI Benchmark and best practices for SaaS vendors and managed services vendors.  The Pod model is designed so that each customer gets its own copy or application stack.  This pattern can be in SaaS as well as managed services industries in which each customer's environment is independent from another and the only parts that are shared are the control plane. 
 
-The architecture diagram below depicts the single tenancy blueprint, clearly separating the ISV management plane (red color) from ISV customers (blue and grey) compartments.
+The architecture diagram below depicts the single tenancy blueprint, clearly separating the SaaS management plane (red color) from SaaS customers (blue and grey) compartments.
 
-### Management Plane
+### Control Plane
 
-### Customers
+### Customers Plane
 
 ### Management Groups
 
 ### Root Level Resources
 
-![isv-pod-architecture](images/isv-pod-architecture.png)
+![SaaS-pod-architecture](images/SaaS-pod-architecture.png)
 
-[Click here](./images/isv-pod-architecture.drawio) to download the drawio version.
+[Click here](./images/SaaS-pod-architecture.drawio) to download the drawio version.
 
 ## Configuration Files
 
@@ -75,9 +75,9 @@ The foundational stack joins IAM, Security and Observability resources in a sing
 
 Click the button below to deploy the stack with the OCI Landing Zones Orchestrator. The variables are all pre-filled with configuration files available in this repository, along with all required dependencies, stored in an OCI private Object Storage bucket.
 
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"bootstrap/compartments_output.json","save_output":true,"oci_object_prefix":"iam/output"})
+[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/main/examples/vision/iam/config/iam-config.json","url_dependency_source_oci_bucket":"SaaS-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"bootstrap/compartments_output.json","save_output":true,"oci_object_prefix":"iam/output"})
 
-![isv-pod-architecture-mgmt-plane-foundational](images/isv-pod-architecture-mgmt-plane-foundational.png)
+![SaaS-pod-architecture-mgmt-plane-foundational](images/SaaS-pod-architecture-mgmt-plane-foundational.png)
 
 ### Management Plane Network Stack Deployment
 
