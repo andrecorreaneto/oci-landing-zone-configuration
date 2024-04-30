@@ -2,13 +2,21 @@
 
 ## Introduction
 
-This repository contains the configuration files for OCI Software as a Service (SaaS) Vendor Landing Zone Architecture Pod Model Blueprint, which is based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. This Blueprint is designed for SaaS vendors to be able to on board OCI in a streamlined manner that aligns to the CIS OCI OCI Benchmark and best practices for SaaS vendors and managed services vendors.  The Pod model is designed so that each customer gets its own copy or application stack.  This pattern can be in SaaS as well as managed services industries in which each customer's environment is independent from another and the only parts that are shared are the control plane. 
+This repository contains the configuration files for OCI SaaS (Software-as-a-Service) Vendor Landing Zone Architecture Pod Model blueprint based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. This Blueprint is designed for SaaS vendors and managed service providers to onboard OCI in a streamlined manner that aligns with the CIS OCI Benchmark and best practices for SaaS vendors and managed services vendors.  The Pod model is designed so that each customer gets a copy or application stack.  This pattern can be seen in SaaS and managed services industries where each customer's environment is independent of another, and the only parts shared are the control plane. 
 
-The architecture diagram below depicts the single tenancy blueprint, clearly separating the SaaS management plane (red color) from SaaS customers (blue and grey) compartments.
+The following architecture diagram depicts a single tenancy blueprint, separating the control plane (red color) from the customer plane (blue and grey) compartments.
 
-### Control Plane
+### Enclosing Compartment
 
-### Customers Plane
+The enclosing compartment represents the environment of the SaaS offering or a single SaaS offering.  The former would separate the production environment from the test environment, and the latter would be SaaS Application 1 and SaaS Application 2. It achieves this by representing the scope for OCI IAM and guard rails used in the SaaS respective environment.  
+
+
+### Control Plane Compartment
+
+The control plane is the compartment red.  The control plane compartment is designed to house the OCI resources that provide the functions and processes that determine which path the data and OCI resources
+
+
+### Customers Plane Compartment
 
 ### Management Groups
 
