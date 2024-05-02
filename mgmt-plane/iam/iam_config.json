@@ -1,37 +1,50 @@
 {
     "compartments_configuration" : {
-        "default_parent_id" : "TOP-CMP",
         "compartments" : {
-            "MGMT-PLANE-CMP" : {
-                "name" : "isv-mgmt-plane-cmp",
-                "description" : "Management Plane compartment.",
-                "children" : {
-                    "SHARED-NETWORK-CMP" : {
-                        "name" : "isv-network-cmp",
-                        "description" : "Shared customer network compartment."
+            "TOP-CMP" : { 
+                "name" : "isv-enclosing-cmp", 
+                "description" : "ISV enclosing compartment.",
+                "children" : {   
+                    "MGMT-PLANE-CMP" : {
+                        "name" : "isv-mgmt-plane-cmp",
+                        "description" : "Management Plane compartment.",
+                        "children" : {
+                            "SHARED-NETWORK-CMP" : {
+                                "name" : "isv-network-cmp",
+                                "description" : "Shared customer network compartment."
+                            },
+                            "SHARED-LOGGING-CMP" : {
+                                "name" : "isv-logging-cmp",
+                                "description" : "Shared logging compartment."
+                            },
+                            "SHARED-SERVICES-CMP" : {
+                                "name" : "isv-shared-services-cmp",
+                                "description" : "Shared services compartment."
+                            }
+                        }
                     },
-                    "SHARED-LOGGING-CMP" : {
-                        "name" : "isv-logging-cmp",
-                        "description" : "Shared logging compartment."
+                    "CUSTOMERS-CMP" : {
+                        "name" : "isv-customers-cmp",
+                        "description" : "Customers enclosing compartment."
                     },
-                    "SHARED-SERVICES-CMP" : {
-                        "name" : "isv-shared-services-cmp",
-                        "description" : "Shared services compartment."
-                    }
-                }
-            },
-            "CUSTOMERS-CMP" : {
-                "name" : "isv-customers-cmp",
-                "description" : "Customers enclosing compartment."
-            },
-            "SNOWFLAKE-CUSTOMERS-CMP" : {
-                "name" : "isv-snowflake-customers-cmp",
-                "description" : "Snowflake customers enclosing compartment."
-            }        
+                    "SNOWFLAKE-CUSTOMERS-CMP" : {
+                        "name" : "isv-snowflake-customers-cmp",
+                        "description" : "Snowflake customers enclosing compartment."
+                    } 
+                }    
+            }           
         }
     },
     "groups_configuration" : {
         "groups" : {
+            "IAM-GROUP" : {
+                "name" : "isv-ops-iam-group",
+                "description" : "ISV IAM operations group."
+            },
+            "CRED-GROUP" : {
+                "name" : "isv-ops-cred-group",
+                "description" : "ISV Credential operations group."
+            },
             "NETWORK-GROUP" : {
                 "name" : "isv-ops-network-grp",
                 "description" : "ISV Network operations group."
@@ -71,6 +84,30 @@
                 "statements" : [
                   "define tenancy usage-report as ocid1.tenancy.oc1..aaaaaaaaned4fkpkisbwjlr56u7cj63lf3wffbilvqknstgtvzub7vhqkggq", 
                   "endorse group isv-ops-governance-grp to read objects in tenancy usage-report",
+                  "allow group isv-ops-iam-group to manage users in tenancy where all {request.operation != 'ListApiKeys',request.operation != 'ListAuthTokens',request.operation != 'ListCustomerSecretKeys',request.operation != 'UploadApiKey',request.operation != 'DeleteApiKey',request.operation != 'UpdateAuthToken',request.operation != 'CreateAuthToken',request.operation != 'DeleteAuthToken',request.operation != 'CreateSecretKey',request.operation != 'UpdateCustomerSecretKey',request.operation != 'DeleteCustomerSecretKey'}",
+                  "allow group isv-ops-iam-group to read policies in tenancy",
+                  "allow group isv-ops-iam-group to manage groups in tenancy where all {target.group.name != 'Administrators', target.group.name != 'isv-ops-cred-group'}",
+                  "allow group isv-ops-iam-group to inspect identity-providers in tenancy",
+                  "allow group isv-ops-iam-group to manage identity-providers in tenancy where any {request.operation = 'AddIdpGroupMapping', request.operation = 'DeleteIdpGroupMapping'}",
+                  "allow group isv-ops-iam-group to manage dynamic-groups in tenancy",
+                  "allow group isv-ops-iam-group to manage authentication-policies in tenancy",
+                  "allow group isv-ops-iam-group to manage network-sources in tenancy",
+                  "allow group isv-ops-iam-group to manage quota in tenancy",
+                  "allow group isv-ops-iam-group to read audit-events in tenancy",
+                  "allow group isv-ops-iam-group to manage tag-defaults in tenancy",
+                  "allow group isv-ops-iam-group to manage tag-namespaces in tenancy",
+                  "allow group isv-ops-iam-group to manage orm-stacks in tenancy",
+                  "allow group isv-ops-iam-group to manage orm-jobs in tenancy",
+                  "allow group isv-ops-iam-group to manage orm-config-source-providers in tenancy",
+                  "allow group isv-ops-iam-group to manage policies in tenancy",
+                  "allow group isv-ops-iam-group to manage compartments in tenancy",
+                  "allow group isv-ops-cred-group to manage users in tenancy where any {request.operation = 'ListApiKeys',request.operation = 'ListAuthTokens',request.operation = 'ListCustomerSecretKeys',request.operation = 'UploadApiKey',request.operation = 'DeleteApiKey',request.operation = 'UpdateAuthToken',request.operation = 'CreateAuthToken',request.operation = 'DeleteAuthToken',request.operation = 'CreateSecretKey',request.operation = 'UpdateCustomerSecretKey',request.operation = 'DeleteCustomerSecretKey',request.operation = 'UpdateUserCapabilities'}",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to inspect users in tenancy",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to inspect groups in tenancy",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to use cloud-shell in tenancy",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to read usage-budgets in tenancy",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to read usage-reports in tenancy",
+                  "allow group isv-ops-iam-group, isv-ops-cred-group to read objectstorage-namespaces in tenancy",
                   "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to read objectstorage-namespaces in tenancy",
                   "allow group isv-ops-network-grp, isv-ops-security-grp, isv-ops-governance-grp, isv-ops-customers-grp, isv-ops-snowflake-customers-grp to inspect compartments in tenancy",
                   "allow group isv-ops-security-grp to manage cloudevents-rules in tenancy",
@@ -272,7 +309,24 @@
                   "allow service cloudguard to use network-security-groups in tenancy",
                   "allow service blockstorage, oke, streaming, Fssoc1Prod, objectstorage-us-ashburn-1, objectstorage-us-phoenix-1, objectstorage-us-sanjose-1, objectstorage-ca-toronto-1 to use keys in tenancy"
                 ]
-              }
+            },
+            "TERRAFORM-RUNTIME-POLICY" : {
+                "name" : "isv-terraform-runtime-policy",
+                "description" : "ISV Terraform runtime policy.",
+                "compartment_id" : "TOP-CMP",                
+                "statements" : [
+                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage buckets in compartment isv-enclosing-cmp",
+                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
+                ]   
+            }
         }
-    }
+    },
+    "object_storage_configuration" : {
+      "buckets" : {
+          "TERRAFORM-RUNTIME-BUCKET" : {
+              "compartment_id" : "TOP-CMP",
+              "name" : "isv-terraform-runtime-bucket"
+          }    
+      }
+  }
 }
