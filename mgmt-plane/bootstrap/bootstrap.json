@@ -6,18 +6,5 @@
                 "name" : "isv-terraform-runtime-bucket"
             }    
         }
-    },
-    "policies_configuration" : {
-        "supplied_policies" : {
-            "TERRAFORM-RUNTIME-POLICY" : {
-                "name" : "isv-terraform-runtime-policy",
-                "description" : "ISV Terraform runtime policy.",
-                "compartment_id" : "TOP-CMP",                
-                "statements" : [
-                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage buckets in compartment isv-enclosing-cmp",
-                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
-                ]   
-            }
-        }    
     }
 }  
