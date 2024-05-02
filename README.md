@@ -25,6 +25,8 @@ The blueprint is described in configuration files (JSON documents) that can be d
 The configuration files are organized in different folders, according to the broader area they belong. The folder structure is the following:
 
 - mgmt-plane: a top level folder for management plane, management groups and Root level resources.
+    - bootstrap:
+        - [bootstrap.json](./mgmt-plane/bootstrap/bootstrap.json), with the required resources allowing for the split deployment model, including an OCI private bucket and basic IAM policies for bucket access.
     - iam: 
         - [iam_config.json](./mgmt-plane/iam/iam_config.json), with the IAM configuration, including compartments, groups and policies.
     - governance: 
@@ -71,11 +73,11 @@ Next we show how the whole blueprint is deployed as a composite configuration of
 
 ### Management Plane Foundational Stack Deployment
 
-The foundational stack joins IAM, Security and Observability resources in a single configuration. As mentioned before, it can be further split depending on deployment requirements. 
+The foundational stack joins IAM, Governance, Security and Observability resources in a single configuration. As mentioned before, it can be further split depending on deployment requirements. 
 
-Click the button below to deploy the stack with the OCI Landing Zones Orchestrator. The variables are all pre-filled with configuration files available in this repository, along with all required dependencies, stored in an OCI private Object Storage bucket.
+Click the button below to deploy the stack using the OCI Landing Zones Orchestrator with all variables already pre-filled.
 
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/iam/iam_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","save_output":true,"oci_object_prefix":"iam/output"})
+[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/bootstrap/bootstrap.json","https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/iam/iam_config.json","https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/governance/budgets_config.json","https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/observability/observability_config.json","https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/security/scanning_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","save_output":true,"oci_object_prefix":"iam/output"})
 
 ![isv-pod-architecture-mgmt-plane-foundational](images/isv-pod-architecture-mgmt-plane-foundational.png)
 
