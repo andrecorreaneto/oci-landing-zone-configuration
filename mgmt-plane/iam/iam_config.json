@@ -65,7 +65,7 @@
     "policies_configuration" : {
         "supplied_policies" : {
             "ROOT-POLICY" : {
-                "name" : "isv-root-policy",
+                "name" : "isv-mgmt-plane-root-policy",
                 "description" : "Root compartment policy.",
                 "compartment_id" : "TENANCY-ROOT",
                 "statements" : [

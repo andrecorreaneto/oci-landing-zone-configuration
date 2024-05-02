@@ -2,19 +2,18 @@
     "compartments_configuration" : {
         "compartments" : {
             "TOP-CMP" : { 
-                "parent_id" : "ocid1.compartment.oc1..aaaaaaaa7wo67pnm5672hgnmkipwqx6c3pp2q4d2gixzz3doo33u733fuvmq",
-                "name" : "isv-blueprint-cmp", 
-                "description" : "ISV top compartment."
+                "name" : "isv-enclosing-cmp", 
+                "description" : "ISV enclosing compartment."
             }  
         }
     },
     "groups_configuration" : {
         "groups" : {
-            "BOOTSTRAP-IAM-GROUP" : {
+            "IAM-GROUP" : {
                 "name" : "isv-ops-iam-group",
                 "description" : "ISV IAM operations group."
             },
-            "BOOTSTRAP-CRED-GROUP" : {
+            "CRED-GROUP" : {
                 "name" : "isv-ops-cred-group",
                 "description" : "ISV Credential operations group."
             }
@@ -22,8 +21,17 @@
     },
     "policies_configuration" : {
         "supplied_policies" : {
-            "BOOTSTRAP-IAM-CRED-ROOT-POLICY" : {
-                "name" : "isv-iam-cred-root-policy",
+            "TERRAFORM-RUNTIME-POLICY" : {
+                "name" : "isv-bootstrap-terraform-runtime-policy",
+                "description" : "ISV Terraform runtime policy.",
+                "compartment_id" : "TOP-CMP",                
+                "statements" : [
+                    "allow group isv-ops-iam-group to manage buckets in compartment isv-enclosing-cmp",
+                    "allow group isv-ops-iam-group to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
+                ]   
+            },
+            "IAM-CRED-ROOT-POLICY" : {
+                "name" : "isv-bootstrap-iam-cred-root-policy",
                 "description" : "Root compartment policy for IAM and credential administrators.",
                 "compartment_id" : "TENANCY-ROOT",
                 "statements" : [
@@ -53,6 +61,14 @@
                     "allow group isv-ops-iam-group, isv-ops-cred-group to read objectstorage-namespaces in tenancy"
                 ]
             }
+        }
+    },
+    "object_storage_configuration" : {
+        "buckets" : {
+            "TERRAFORM-RUNTIME-BUCKET" : {
+                "compartment_id" : "TOP-CMP",
+                "name" : "isv-terraform-runtime-bucket"
+            }    
         }
     }
 }  
