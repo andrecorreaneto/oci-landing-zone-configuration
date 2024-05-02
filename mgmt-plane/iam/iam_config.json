@@ -309,24 +309,7 @@
                   "allow service cloudguard to use network-security-groups in tenancy",
                   "allow service blockstorage, oke, streaming, Fssoc1Prod, objectstorage-us-ashburn-1, objectstorage-us-phoenix-1, objectstorage-us-sanjose-1, objectstorage-ca-toronto-1 to use keys in tenancy"
                 ]
-            },
-            "TERRAFORM-RUNTIME-POLICY" : {
-                "name" : "isv-terraform-runtime-policy",
-                "description" : "ISV Terraform runtime policy.",
-                "compartment_id" : "TOP-CMP",                
-                "statements" : [
-                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage buckets in compartment isv-enclosing-cmp",
-                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
-                ]   
             }
         }
-    },
-    "object_storage_configuration" : {
-      "buckets" : {
-          "TERRAFORM-RUNTIME-BUCKET" : {
-              "compartment_id" : "TOP-CMP",
-              "name" : "isv-terraform-runtime-bucket"
-          }    
-      }
-  }
+    }
 }

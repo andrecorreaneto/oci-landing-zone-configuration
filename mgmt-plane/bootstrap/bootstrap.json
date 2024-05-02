@@ -1,68 +1,4 @@
 {
-    "compartments_configuration" : {
-        "compartments" : {
-            "TOP-CMP" : { 
-                "name" : "isv-enclosing-cmp", 
-                "description" : "ISV enclosing compartment."
-            }  
-        }
-    },
-    "groups_configuration" : {
-        "groups" : {
-            "IAM-GROUP" : {
-                "name" : "isv-ops-iam-group",
-                "description" : "ISV IAM operations group."
-            },
-            "CRED-GROUP" : {
-                "name" : "isv-ops-cred-group",
-                "description" : "ISV Credential operations group."
-            }
-        }
-    },
-    "policies_configuration" : {
-        "supplied_policies" : {
-            "TERRAFORM-RUNTIME-POLICY" : {
-                "name" : "isv-bootstrap-terraform-runtime-policy",
-                "description" : "ISV Terraform runtime policy.",
-                "compartment_id" : "TOP-CMP",                
-                "statements" : [
-                    "allow group isv-ops-iam-group to manage buckets in compartment isv-enclosing-cmp",
-                    "allow group isv-ops-iam-group to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
-                ]   
-            },
-            "IAM-CRED-ROOT-POLICY" : {
-                "name" : "isv-bootstrap-iam-cred-root-policy",
-                "description" : "Root compartment policy for IAM and credential administrators.",
-                "compartment_id" : "TENANCY-ROOT",
-                "statements" : [
-                    "allow group isv-ops-iam-group to manage users in tenancy where all {request.operation != 'ListApiKeys',request.operation != 'ListAuthTokens',request.operation != 'ListCustomerSecretKeys',request.operation != 'UploadApiKey',request.operation != 'DeleteApiKey',request.operation != 'UpdateAuthToken',request.operation != 'CreateAuthToken',request.operation != 'DeleteAuthToken',request.operation != 'CreateSecretKey',request.operation != 'UpdateCustomerSecretKey',request.operation != 'DeleteCustomerSecretKey'}",
-                    "allow group isv-ops-iam-group to read policies in tenancy",
-                    "allow group isv-ops-iam-group to manage groups in tenancy where all {target.group.name != 'Administrators', target.group.name != 'isv-ops-cred-group'}",
-                    "allow group isv-ops-iam-group to inspect identity-providers in tenancy",
-                    "allow group isv-ops-iam-group to manage identity-providers in tenancy where any {request.operation = 'AddIdpGroupMapping', request.operation = 'DeleteIdpGroupMapping'}",
-                    "allow group isv-ops-iam-group to manage dynamic-groups in tenancy",
-                    "allow group isv-ops-iam-group to manage authentication-policies in tenancy",
-                    "allow group isv-ops-iam-group to manage network-sources in tenancy",
-                    "allow group isv-ops-iam-group to manage quota in tenancy",
-                    "allow group isv-ops-iam-group to read audit-events in tenancy",
-                    "allow group isv-ops-iam-group to manage tag-defaults in tenancy",
-                    "allow group isv-ops-iam-group to manage tag-namespaces in tenancy",
-                    "allow group isv-ops-iam-group to manage orm-stacks in tenancy",
-                    "allow group isv-ops-iam-group to manage orm-jobs in tenancy",
-                    "allow group isv-ops-iam-group to manage orm-config-source-providers in tenancy",
-                    "allow group isv-ops-iam-group to manage policies in tenancy",
-                    "allow group isv-ops-iam-group to manage compartments in tenancy",
-                    "allow group isv-ops-cred-group to manage users in tenancy where any {request.operation = 'ListApiKeys',request.operation = 'ListAuthTokens',request.operation = 'ListCustomerSecretKeys',request.operation = 'UploadApiKey',request.operation = 'DeleteApiKey',request.operation = 'UpdateAuthToken',request.operation = 'CreateAuthToken',request.operation = 'DeleteAuthToken',request.operation = 'CreateSecretKey',request.operation = 'UpdateCustomerSecretKey',request.operation = 'DeleteCustomerSecretKey',request.operation = 'UpdateUserCapabilities'}",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to inspect users in tenancy",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to inspect groups in tenancy",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to use cloud-shell in tenancy",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to read usage-budgets in tenancy",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to read usage-reports in tenancy",
-                    "allow group isv-ops-iam-group, isv-ops-cred-group to read objectstorage-namespaces in tenancy"
-                ]
-            }
-        }
-    },
     "object_storage_configuration" : {
         "buckets" : {
             "TERRAFORM-RUNTIME-BUCKET" : {
@@ -70,5 +6,18 @@
                 "name" : "isv-terraform-runtime-bucket"
             }    
         }
+    },
+    "policies_configuration" : {
+        "supplied_policies" : {
+            "TERRAFORM-RUNTIME-POLICY" : {
+                "name" : "isv-terraform-runtime-policy",
+                "description" : "ISV Terraform runtime policy.",
+                "compartment_id" : "TOP-CMP",                
+                "statements" : [
+                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage buckets in compartment isv-enclosing-cmp",
+                    "allow group isv-ops-iam-group, isv-ops-network-grp, isv-ops-security-grp to manage objects in compartment isv-enclosing-cmp where target.bucket.name = 'isv-terraform-runtime-bucket'"
+                ]   
+            }
+        }    
     }
 }  
