@@ -17,7 +17,7 @@ This stack is executed in different stages with a **PROGRESSIVELY UPDATED single
 
 - [**Subsequent stages**](#3rd-stage): after each customer onboarding stack. 
 
-### <a name="1st-stage">1st Stage</a> 
+### <a name="1st-stage">Network Stack 1st Stage</a> 
 
 #### Stack Configuration
 
@@ -37,9 +37,9 @@ Click the button to create the stack with all variables pre-filled.
 
 
 
-### <a name="2nd-stage">2nd Stage</a>
+### <a name="2nd-stage">Network Stack 2nd Stage</a>
 
-**THE 2ND STAGE IS NOT A NEW STACK, BUT AN UPDATE TO WHAT IS DEPLOYED IN THE 1ST STAGE, NOW INCLUDING THE CONFIGURATIONS DEPLOYED BY THE NETWORK FIREWALL STACK.**
+**THE 2ND STAGE IS NOT A NEW STACK, BUT AN UPDATE TO NETWORK STACK INITIAL DEPLOYMENT, NOW INCLUDING THE CONFIGURATIONS DEPLOYED BY THE NETWORK FIREWALL STACK.**
 
 **AFTER THIS STAGE THE MANAGEMENT PLANE IS CONSIDERED READY TO ONBOARD CUSTOMERS.**
 
@@ -112,7 +112,7 @@ Specifically:
 }
 ```
 
-4. DRG Import route distributions are added, for the dynamic learning of route rules:
+4. DRG Import route distributions **are added**, for the dynamic learning of route rules:
 
 ```
 "drg_route_distributions" : {
@@ -189,9 +189,9 @@ Input Configuration Files | Input Dependency Files | Output
 
 
 
-### <a name="3rd-stage">3rd Stage</a>
+### <a name="3rd-stage">Network Stack 3rd Stage</a>
 
-**THE 3RD STAGE IS NOT A NEW STACK, BUT AN UPDATE TO EACH CUSTOMER ONBOARDING INITIATION.**
+**THE 3RD STAGE IS NOT A NEW STACK, BUT AN UPDATE TO THE NETWORK STACK AFTER EACH CUSTOMER ONBOARDING INITIATION.**
 
 At this stage, the Central Hub VCN is updated for routing traffic to the newly added customer VCN. 
 

@@ -24,4 +24,4 @@ Click the button to create the stack with all variables pre-filled:
 
 ### What Gets Deployed
 
-![isv-pod-architecture-mgmt-plane-foundational](../images/isv-pod-architecture-mgmt-plane-foundational.png)
+![isv-pod-architecture-mgmt-plane-foundational](../images/SaaS-pod-architecture-mgmt-plane-foundational.png)

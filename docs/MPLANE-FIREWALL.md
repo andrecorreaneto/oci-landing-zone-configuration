@@ -8,7 +8,7 @@ Management plane network administrators.
 
 ### Deployment Order
 
-This stack is executed after the first deployment of the [Management Plane Network Stack](./MPLANE-NETWORKING.md).
+This stack is executed after the initial deployment of the [Management Plane Network Stack](./MPLANE-NETWORKING.md#1st-stage).
 
 ### Stack Configuration
 
