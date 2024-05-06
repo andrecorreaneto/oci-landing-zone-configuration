@@ -62,9 +62,9 @@ The network compartment (green) is designed to house the shared Virtual Cloud Ne
 
 **Subscriptions:**
 
-![SaaS-pod-architecture](images/saas-pod-architecture.png)
+![SaaS-pod-architecture](images/SaaS-pod-architecture.png)
 
-[Click here](./images/saas-pod-architecture.drawio) to download the drawio version.
+[Click here](./images/SaaS-pod-architecture.drawio) to download the drawio version.
 
 ## Configuration Files
 
@@ -127,7 +127,7 @@ Input Configuration Files | Input Dependency Files | Output
 
 [![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/bootstrap/bootstrap.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/iam/iam_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/governance/budgets_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/observability/observability_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/security/scanning_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","save_output":true,"oci_object_prefix":"iam/output"})
 
-![saas-pod-architecture-mgmt-plane-foundational](images/saas-pod-architecture-mgmt-plane-foundational.png)
+![SaaS-pod-architecture-mgmt-plane-foundational](images/SaaS-pod-architecture-mgmt-plane-foundational.png)
 
 ### 2. Management Plane Network Stack Deployment - Initial Configuration
 
