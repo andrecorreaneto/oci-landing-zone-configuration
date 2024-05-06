@@ -91,13 +91,23 @@ The configuration files are organized in different folders, according to the bro
     - firewall: [firewall_config.json](./mgmt-plane/firewall/firewall_config.json), with firewall appliance and OCI Network Load Balancer configurations.
 
 - customers: a top level folder for each customer configuration.
-    - customer1: [customer1_config.json](./customers/customer1/customer1_config.json), with all resource configurations for customer 1, including IAM and networking.
+    - customer1: [customer1_config.json](./customers/customer1/customer1_config.json), with all resource configurations for customer 1, including IAM, budget and networking.
+    - customer2: [customer2_config.json](./customers/customer2/customer2_config.json), with all resource configurations for customer 2, including IAM, budget and networking.
 
-These configuration files are designed to be used as templates, owned and modified at will by customers that are deploying the model.
+**THESE CONFIGURATION FILES ARE DESIGNED TO BE USED AS TEMPLATES, OWNED AND MODIFIED AT WILL BY CUSTOMERS THAT ARE DEPLOYING THE MODEL.**
 
 ## How to Deploy
 
-The blueprint (or any customization) configurations can be deployed in separate stacks. A stack is a set of configurations that are managed by a single Terraform execution and thus reflected in a single Terraform state file. The decision factor for how many stacks depends on how the organization wants to manage the environment, especially which roles are expected to deploy which parts of the blueprint. 
+The blueprint (or any customization) configurations are deployed in separate stacks. A stack is a set of configurations that are managed by a single Terraform execution and thus reflected in a single Terraform state file. The decision factor for how many stacks lies on how the organization wants to manage the environment, especially which roles are expected to deploy which parts of the blueprint. 
+
+On a high level, there are two broader sets of stacks for the ISV blueprint build out: **management plane deployment** and **customer onboarding**.
+
+**Management plane deployment** is composed of the following stacks, that must be executed as the presented order below:
+1. **Foundational stack**: assembles bootstrap, IAM, governance, security and observability configuration files in a single stack. As mentioned before, it can be further split depending on deployment requirements. 
+2. **Network stack**: manages the management plane network configuration, including all the routing to customer VCNs.
+3. **Firewall stack**: manages a pair of PAN (Palo Alto Networks) firewalls, *sandwiched* by a pair of OCI network load balancers.
+
+**Customer onboarding** is made of customer-specific stacks always followed by an update to the Management Plane Network Stack for network routing.
 
 ### The OCI Landing Zones Orchestrator
 
@@ -110,99 +120,22 @@ The [OCI Landing Zones Orchestrator](https://github.com/oracle-quickstart/terraf
 - [Observability & Monitoring](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-observability)
 - [Secure Workloads](https://github.com/oracle-quickstart/terraform-oci-secure-workloads)
 
-Next we show how to deploy the blueprint as separate stacks with the Orchestrator.
+Next we show how to deploy the blueprint with the Orchestrator per the stacks defined above:
 
-The "Deploy to Oracle Cloud" buttons create the stacks with all variables already pre-filled.
+#### Management Plane
+The following stacks are executed once each. After stack #4, the management plane network is ready to onboard customers.
+ 1. [Foundational Stack](./docs/MPLANE-FOUNDATIONAL.md)
+ 2. [Network Stack](./docs/MPLANE-NETWORKING.md)
+ 3. [Firewall Stack](./docs/MPLANE-FIREWALL.md)
+ 4. [Network Stack Post Firewall Update](./docs/MPLANE-NETWORKING.md#2nd-stage)
 
-**Stacks 1-4 are executed once. After stack 4, the network and firewall are configured to onboard customers. Stacks 5-6 must be repeated for each new customer onboarding.**
+#### Customer Onboarding
+The following are executed for each new customer.
 
-### 1. Management Plane Foundational Stack Deployment
+ 5. [Customer Onboarding Stack](./docs/CUSTOMER-ONBOARDING.md)
+ 6. [Network Stack Post Customer Update](./docs/MPLANE-NETWORKING.md#3rd-stage)
 
-The foundational stack assembles bootstrap, IAM, governance, security and observability configuration files in a single configuration. As mentioned before, it can be further split depending on deployment requirements. 
+ The diagram below depicts the deployment sequencing, presented bottom-up. Note that the Network stack is updated once after Firewall deployment and after each new customer onboarding.
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[bootstrap.json](./mgmt-plane/bootstrap/bootstrap.json), [iam_config.json](./mgmt-plane/iam/iam_config.json), [budgets_config.json](./mgmt-plane/governance/budgets_config.json), [scanning_config.json](./mgmt-plane/security/scanning_config.json), [observability_config.json](./mgmt-plane/observability/observability_config.json) | None | iam/output/compartments_output.json
+ ![Deployment Sequencing](./images/deployment-sequencing.png)
 
-
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/bootstrap/bootstrap.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/iam/iam_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/governance/budgets_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/observability/observability_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/security/scanning_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","save_output":true,"oci_object_prefix":"iam/output"})
-
-![SaaS-pod-architecture-mgmt-plane-foundational](images/SaaS-pod-architecture-mgmt-plane-foundational.png)
-
-### 2. Management Plane Network Stack Deployment - Initial Configuration
-
-The network stack deploys the initial network configuration, containing the management plane VCNs and a DRG. At this stage, there are not DRG attachments.
-
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_initial_config.json](./mgmt-plane/network/network_initial_config.json) | iam/output/compartments_output.json | network/output/network_output.json
-
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/network/network_initial_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json","save_output":true,"oci_object_prefix":"network/output"})
-
-![isv-pod-architecture-mgmt-plane-network-initial](images/isv-pod-architecture-mgmt-plane-network-initial.png)
-
-### 3. Management Plane Firewall Stack Deployment
-
-The firewall stack deploys a pair of Palo Alto firewalls, *sandwiched* by a pair of OCI network load balancers. 
-
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[firewall_config.json](./mgmt-plane/firewall/firewall_config.json) | iam/output/compartments_output.json, network/output/network_output.json  | firewall/output/instances_output.json
-
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/firewall/firewall_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json,network/output/network_output.json","save_output":true,"oci_object_prefix":"firewall/output"})
-
-![isv-pod-architecture-mgmt-plane-firewall](images/isv-pod-architecture-mgmt-plane-firewall.png)
-
-### 4. Management Plane Network Stack Deployment - Post Firewall Configuration
-
-**This is not a new stack. It is an update to "2. Management Plane Network Stack Deployment - Initial Configuration"**
-
-It updates the initial network configuration with route rules to the firewall and DRG attachments in the Central Hub VCN. 
-
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_post_firewall_config.json](./mgmt-plane/network/network_post_firewall_config.json) | iam/output/compartments_output.json, firewall/output/instances_output.json  | network/output/network_output.json
-
-![isv-pod-architecture-mgmt-plane-network-post-firewall](images/isv-pod-architecture-mgmt-plane-network-post-firewall.png)
-
-**At this stage the network is considered fully configured to onboard customers.**
-
-### 5a. Customer 1 Stack Deployment
-
-A customer stack deploys IAM, budget and network configuration for one customer. It initiates the onboarding process of a customer into the tenancy. Each customer is expected to have its own stack.
-
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/customers/customer1/customer1_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json,network/output/network_output.json","save_output":true,"oci_object_prefix":"customer1/output"})
-
-![isv-pod-architecture-customer-1](images/isv-pod-architecture-customer-1.png)
-
-### 6a. Management Plane Network Stack Deployment - Post Customer 1 Onboarding Configuration
-
-**This is not a new stack. It is an update to "4. Management Plane Network Stack Deployment - Post Firewall Configuration" and must be executed after each customer deployment.**
-
-It updates the DRG for routing traffic between the newly customer VCN and the firewall. 
-
-[ ADD CONFIGURATION SNIPPET TO CENTRAL HUB DRG ATTACHMENT ]
-
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_post_each_customer_config.json](./mgmt-plane/network/network_post_each_customer_config.json) | iam/output/compartments_output.json, firewall/output/instances_output.json, customer1/output/network_output.json | network/output/network_output.json
-
-### 5b. Customer 2 Stack Deployment
-
-This is another customer sample stack.
-
-[![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/customers/customer1/customer2_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json,network/output/network_output.json","save_output":true,"oci_object_prefix":"customer2/output"})
-
-![isv-pod-architecture-customer-1](images/isv-pod-architecture-customer-2.png)
-
-### 6b. Management Plane Network Stack Deployment - Post Customer 2 Onboarding Configuration
-
-**This is not a new stack. It is an update to "6a. Management Plane Network Stack Deployment - Post Customer 1 Onboarding Configuration" and must be executed after each customer deployment.**
-
-It updates the DRG for routing traffic between the newly customer VCN and the firewall. 
-
-[ ADD CONFIGURATION SNIPPET TO CENTRAL HUB DRG ATTACHMENT ]
-
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_post_each_customer_config.json](./mgmt-plane/network/network_post_each_customer_config.json) | iam/output/compartments_output.json, firewall/output/instances_output.json, customer1/output/network_output.json, customer2/output/network_output.json | network/output/network_output.json
