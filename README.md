@@ -1,22 +1,70 @@
-# ISV Landing Zone Architecture POD Model Blueprint
+# SaaS Landing Zone Architecture POD Model Blueprint
 
-## Introduction
+## 
+### Overview
 
-This repository contains the configuration files for OCI ISV Landing Zone Architecture POD Model Blueprint, which is based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. In the POD model, each ISV customer gets its own copy of the application.
+This repository contains the configuration files for OCI SaaS (Software-as-a-Service) Vendor Landing Zone Architecture Pod Model blueprint based on OCI Core Landing Zone (formerly known as OCI CIS Landing Zone) principles. This Blueprint is designed for SaaS vendors and managed service providers to onboard OCI in a streamlined manner that aligns with the CIS OCI Benchmark and best practices for SaaS vendors and managed services vendors.  The Pod model is designed so that each customer gets a copy or application stack.  This pattern can be seen in SaaS and managed services industries where each customer's environment is independent of another, and the only parts shared are the management plane. 
 
-The architecture diagram below depicts the single tenancy blueprint, clearly separating the ISV management plane (red color) from ISV customers (blue and grey) compartments.
+The following architecture diagram depicts a single tenancy blueprint, separating the management plane (red color) from the customer plane (blue and grey) compartments.
+
+### Enclosing Compartment
+
+The enclosing compartment (grey) represents the environment of the SaaS offering or a single SaaS offering.  The former would separate the production environment from the test environment, and the latter would be SaaS Application 1 and SaaS Application 2. It achieves this by representing the scope for OCI IAM and guard rails used in the SaaS respective environment.  
+
 
 ### Management Plane
 
-### Customers
+The management plane compartment (red) is designed to house the OCI resources that provide the functions and processes that determine which path the data and OCI resources that make up the application are managed.  A management plane is similar to a cloud provider's control plane and they are shared resources that are used by all application stacks running in the customer plane compartment (blue).  There are three types of functions and processes defined in this blueprint.
 
-### Management Groups
+#### Management Groups
 
-### Root Level Resources
+**Security Administrators:** manage security services and resources including Vaults, Keys, Logging, Vulnerability Scanning, Web Application Firewall, Bastion, Service Connector Hub.
+**Network Administrators:** manage OCI network family, including VCNs, Load Balancers, DRGs, VNICs, IP addresses.
 
-![isv-pod-architecture](images/isv-pod-architecture.png)
+**Shared Services Administrators:** 
 
-[Click here](./images/isv-pod-architecture.drawio) to download the drawio version.
+#### Networking Compartment
+The network compartment (green) is designed to house the shared Virtual Cloud Networks (VCNs) used to secure and route network traffic to and from the application stack including the 
+
+
+### Customers Plane Compartment
+
+
+#### Customer Groups
+
+**Customer Administrators:** manage application stacks deployments and related resources in the Customer Compartment.  OCI resources include Compartments, Network, Compute images, Database OCI Functions, Kubernetes clusters, Streams, Object Storage, Block Storage, File Storage, Keys, and Budgets.
+
+**Snowflake Customer Administrators:** manage application stacks deployments and related resources in the Snowflake Customer Compartment.  OCI resources include Compartments, Network, Compute images, Database OCI Functions, Kubernetes clusters, Streams, Object Storage, Block Storage, File Storage, Keys, and Budgets.
+
+### Tenancy Level
+
+#### Tenancy Level Groups
+
+**IAM Administrators:** manage IAM services and resources including compartments, groups, dynamic groups, policies, identity providers, authentication policies, network sources, tag defaults. However, this group is not allowed to manage the out-of-box Administrators and Credential Administrators groups. It's also not allowed to touch the out-of-box Tenancy Admin Policy policy.
+
+**Credential Administrators:** manage users capabilities and users credentials in general, including API keys, authentication tokens and secret keys.
+
+**Cost Administrators:** manage budgets and usage reports.
+
+**Auditors:** entitled with read-only access across the tenancy and the ability to use cloud-shell to run the cis_reports.py script.
+
+**Announcement Readers:** for reading announcements displayed in OCI Console.
+
+#### Tenancy Level Resources
+
+**Oracle Cloud Guard:** activity, configuration, and threat detector recipes are defined at the tenancy level to examine your resources for security weaknesses and to monitor operators and users for risky activities.
+
+**Policies:**
+
+**Events:** 
+
+**Budgets:**
+
+**Subscriptions:**
+
+![SaaS-pod-architecture](images/saas-pod-architecture.png)
+
+[Click here](./images/saas-pod-architecture.drawio) to download the drawio version.
 
 ## Configuration Files
 
@@ -79,7 +127,7 @@ Input Configuration Files | Input Dependency Files | Output
 
 [![Deploy_To_OCI](./images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/urls-dep-source.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/bootstrap/bootstrap.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/iam/iam_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/governance/budgets_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/observability/observability_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/security/scanning_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","save_output":true,"oci_object_prefix":"iam/output"})
 
-![isv-pod-architecture-mgmt-plane-foundational](images/isv-pod-architecture-mgmt-plane-foundational.png)
+![SaaS-pod-architecture-mgmt-plane-foundational](images/saas-pod-architecture-mgmt-plane-foundational.png)
 
 ### 2. Management Plane Network Stack Deployment - Initial Configuration
 
