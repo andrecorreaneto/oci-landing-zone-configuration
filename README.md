@@ -81,6 +81,7 @@ The configuration files are organized in different folders, according to the bro
         - [budgets_config.json](./mgmt-plane/governance/budgets_config.json), with budgets configuration.
     - security: 
         - [cloud_guard_config.json](./mgmt-plane/security/cloud_guard_config.json), with Cloud Guard configuration.
+        - [security_zones_config.json](./mgmt-plane/security/security_zones_config.json), with Security Zones configuration.
         - [scanning_config.json](./mgmt-plane/security/scanning_config.json), with scanning configuration.
     - observability: 
         - [observability_config.json](./mgmt-plane/observability/observability_config.json), with logging, streams, notifications, events, alarms and service connector hub configurations.
