@@ -172,7 +172,7 @@
                 "THREE-TIER-VCN-DB-NSG" : {
                   "display_name" : "db-nsg",
                   "ingress_rules" : {
-                    "FROM-OUTDOOR-NSG" : {
+                    "FROM-APP-NSG" : {
                       "description"  : "Ingress from App NSG",
                       "stateless"    : false,
                       "protocol"     : "TCP",
