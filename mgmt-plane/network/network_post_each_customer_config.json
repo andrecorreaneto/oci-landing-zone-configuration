@@ -915,7 +915,7 @@
                       "match_criteria" : {
                         "match_type" : "DRG_ATTACHMENT_ID",
                         "attachment_type" : "VCN",
-                        "drg_attachment_key" : "CUSTOMER-1-VCN-ATTACH"
+                        "drg_attachment_key" : "CUSTOMER-1-THREE-TIER-VCN-ATTACH"
                       }
                     }
   
