@@ -92,8 +92,7 @@ The configuration files are organized in different folders, according to the bro
     - firewall: [firewall_config.json](./mgmt-plane/firewall/firewall_config.json), with firewall appliance and OCI Network Load Balancer configurations.
 
 - customers: a top level folder for each customer configuration.
-    - customer1: [customer1_config.json](./customers/customer1/customer1_config.json), with all resource configurations for customer 1, including IAM, budget and networking.
-    - customer2: [customer2_config.json](./customers/customer2/customer2_config.json), with all resource configurations for customer 2, including IAM, budget and networking.
+    - customer1: [compartments_config.json](./customers/customer1/ccompartments_config.json), [budgets_config.json](./customers/customer1/budgets_config.json), [network_three_tier_config.json](./customers/customer1/network_three_tier_config.json) with sample resources configurations for a customer, including IAM, budget and networking, respectively. Use these files as templates to onboard other customers.
 
 **THESE CONFIGURATION FILES ARE DESIGNED TO BE USED AS TEMPLATES, OWNED AND MODIFIED AT WILL BY CUSTOMERS THAT ARE DEPLOYING THE MODEL.**
 
@@ -136,7 +135,7 @@ The following are executed for each new customer.
  5. [Customer Onboarding Stack](./docs/CUSTOMER-ONBOARDING.md)
  6. [Network Stack Post Customer Update](./docs/MPLANE-NETWORKING.md#3rd-stage)
 
- The diagram below depicts the deployment sequencing, presented bottom-up. Note that the Network stack is updated once after Firewall deployment and after each new customer onboarding.
+ The diagram below depicts the deployment sequencing, presented bottom-up. Note that the Network stack must be updated once after Firewall deployment and after each new customer onboarding.
 
  ![Deployment Sequencing](./images/deployment-sequencing.png)
 
