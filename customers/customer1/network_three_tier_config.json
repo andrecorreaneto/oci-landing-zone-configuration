@@ -10,13 +10,13 @@
               "display_name"                     : "three-tier-vcn",
               "is_ipv6enabled"                   : false,
               "is_oracle_gua_allocation_enabled" : false,
-              "cidr_blocks"                      : ["10.0.0.0/26"],
+              "cidr_blocks"                      : ["10.0.0.0/25"],
               "dns_label"                        : "threetiervcn",
               "block_nat_traffic"                : false,
   
               "subnets" : {
                 "THREE-TIER-VCN-WEB-SUBNET" : {
-                  "cidr_block"                 : "10.0.0.0/28",
+                  "cidr_block"                 : "10.0.0.0/27",
                   "dhcp_options_key"           : "default_dhcp_options",
                   "display_name"               : "web-subnet",
                   "dns_label"                  : "web",
@@ -27,7 +27,7 @@
                   "security_list_keys"         : ["THREE-TIER-VCN-SL"]
                 },
                 "THREE-TIER-VCN-APP-SUBNET" : {
-                  "cidr_block"                 : "10.0.0.64/28",
+                  "cidr_block"                 : "10.0.0.32/27",
                   "dhcp_options_key"           : "default_dhcp_options",
                   "display_name"               : "app-subnet",
                   "dns_label"                  : "app",
@@ -38,7 +38,7 @@
                   "security_list_keys"         : ["THREE-TIER-VCN-SL"]
                 },
                 "THREE-TIER-VCN-DB-SUBNET" : {
-                  "cidr_block"                 : "10.0.0.80/28",
+                  "cidr_block"                 : "10.0.0.64/27",
                   "dhcp_options_key"           : "default_dhcp_options",
                   "display_name"               : "db-subnet",
                   "dns_label"                  : "db",
