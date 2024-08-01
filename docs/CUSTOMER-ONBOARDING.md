@@ -6,14 +6,19 @@ A stack that deploys IAM, budget and network configuration for one customer. It 
 
 Customers administrators.
 
-### Deployment Order
+### Deployment Sequence
 
-This stack is executed after the [2nd stage deployment of the Management Plane Network Stack](./MPLANE-NETWORKING.md#2nd-stage).
+1. [Mgmt Plane Foundational - IAM, Logging, Governance](./MPLANE-FOUNDATIONAL.md)
+2. [Mgmt Plane Networking 1st stage - Mgmt Plane VCNs](./MPLANE-NETWORKING.md#network-stack-1st-stage)
+3. [Mgmt Plane Networking - Firewall](./MPLANE-FIREWALL.md)
+4. [Mgmt Plane Networking 2nd stage - Network routing post firewall deployment](./MPLANE-NETWORKING.md#network-stack-2nd-stage)
+5. **Customer Onboarding (this stack)**
+6. [Mgmt Plane Networking 3rd stage - Network routing post customer onboarding](./MPLANE-NETWORKING.md#network-stack-3rd-stage)
 
 ### Stack Configuration
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
 [compartments_config.json](../customers/customer1/compartments_config.json), [budgets_config.json](../customers/customer1/budgets_config.json), [network_three_tier_config.json](../customers/customer1/network_three_tier_config.json) | iam/output/compartments_output.json, network/output/network_output.json  | customer1/output/compartments_output.json, customer1/output/network_output.json
 
 ### Stack Creation

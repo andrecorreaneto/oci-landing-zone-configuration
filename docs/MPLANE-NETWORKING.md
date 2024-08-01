@@ -6,23 +6,25 @@ The network stack manages the management plane networking configuration, includi
 
 Management plane network administrators.
 
-### Deployment Order
+### Deployment Sequence
 
 This stack is executed in different stages with a **PROGRESSIVELY UPDATED single input configuration file**.
 
-- [**1st stage**](#1st-stage): after the [Foundational stack](./MPLANE-FOUNDATIONAL.md).
-- [**2nd stage**](#2nd-stage): after the [Firewall stack](./MPLANE-FIREWALL.md)
+1. [Mgmt Plane Foundational - IAM, Logging, Governance](./MPLANE-FOUNDATIONAL.md)
+2. **Mgmt Plane Networking 1st stage - Mgmt Plane VCNs (this stack)**
+3. [Mgmt Plane Networking - Firewall](./MPLANE-FIREWALL.md)
+4. **Mgmt Plane Networking 2nd stage - Network routing post firewall deployment (this stack)**
+5. [Customer Onboarding](./CUSTOMER-ONBOARDING.md)
+6. **Mgmt Plane Networking 3rd stage - Network routing post customer onboarding (this stack)**
 
-**AT THIS STAGE THE MANAGEMENT PLANE IS CONSIDERED READY TO ONBOARD CUSTOMERS.**
-
-- [**Subsequent stages**](#3rd-stage): after each customer onboarding stack. 
+**Stacks #5 and #6 must be repeated for each NEW customer onboarding.**
 
 ### <a name="1st-stage">Network Stack 1st Stage</a> 
 
 #### Stack Configuration
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
 [network_initial_config.json](../mgmt-plane/network/network_initial_config.json) | iam/output/compartments_output.json | network/output/network_output.json
 
 #### Stack Creation
@@ -47,7 +49,9 @@ This stage updates the initial network configuration with route rules to the Net
 
 Specifically:
 
-1. A new route table **is added** for routing any traffic to the Network Load Balancer.
+**THESE CONFIGURATION SNIPPETS ARE SHOWN HERE FOR CLARITY PURPOSES. THEY ARE ALL ALREADY ADDED IN [network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json).**
+
+1. A new route table **IS ADDED** for routing any traffic to the Network Load Balancer.
 ```
 "HUB-INGRESS-ROUTE" : {
     "display_name" : "central-hub-vcn-ingress-route",
@@ -62,7 +66,7 @@ Specifically:
 }
 ```              
 
-2. All DRG attachments **are added**, with the attachment to the Firewall VCN (Central Hu VCN) referring to the route table above.
+2. All DRG attachments **ARE ADDED**, with the attachment to the Firewall VCN (Central Hu VCN) referring to the route table above.
 
 ```
 "drg_attachments" : {
@@ -93,7 +97,7 @@ Specifically:
     }
 }
 ```
-3. DRG route tables associated with Import route distributions **are added**:
+3. DRG route tables associated with Import route distributions **ARE ADDED**:
 
 ```
 "drg_route_tables" : {
@@ -112,7 +116,7 @@ Specifically:
 }
 ```
 
-4. DRG Import route distributions **are added**, for the dynamic learning of route rules:
+4. DRG Import route distributions **ARE ADDED**, for the dynamic learning of route rules:
 
 ```
 "drg_route_distributions" : {
@@ -173,15 +177,13 @@ Specifically:
 }
 ```
 
-**THESE CONFIGURATION SNIPPETS ARE SHOWN HERE FOR CLARITY PURPOSES. THEY ARE ALL ALREADY ADDED IN [network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json).**
-
 #### Updated Stack Configuration
 
 In order to update the initial network configuration, edit the existing network stack, replacing the existing Input Configuration File and Input Dependency Files with the files in the table below:
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json) | iam/output/compartments_output.json, firewall/output/instances_output.json  | network/output/network_output.json
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
+[network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json  | network/output/network_output.json
 
 #### What Gets Deployed
 
@@ -197,23 +199,25 @@ At this stage, the Central Hub VCN is updated for routing traffic to the newly a
 
 Specifically:
 
-1. A new route rule **is added** to the Indoor subnet route table. This enforces routing through the DRG for any traffic that leaves the subnet destined to the newly added customer VCN.
+**THESE CONFIGURATION SNIPPETS ARE SHOWN HERE FOR CLARITY PURPOSES. THEY ARE ALL ALREADY ADDED IN [network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json)**
+
+1. A new route rule **IS ADDED** to the Indoor subnet route table. This enforces routing through the DRG for any traffic that leaves the subnet destined to the newly added customer VCN.
 
 ```
 "TO-CUSTOMER-1-VCN-RULE" : {
     "description"        : "To DRG.",
-    "destination"        : "10.0.0.0/25", # newly added customer VCN CIDR range
+    "destination"        : "10.0.0.0/25", ## ======>>> newly added customer VCN CIDR range <<=======
     "destination_type"   : "CIDR_BLOCK",
     "network_entity_key" : "CENTRAL-HUB-DRG"
 }
 ```
 
-2. A new import route distribution statement **is added** to Central Hub VCN Import Route Distribution.
+2. A new import route distribution statement **IS ADDED** to Central Hub VCN Import Route Distribution.
 
 ```
 "CUSTOMER-1-VCN-STMT" : {
     "action" : "ACCEPT",
-    "priority" : 3, ######  INCREMENT THIS FOR EACH NEWLY ADDED CUSTOMER.
+    "priority" : 3, ## ======>>> INCREMENT THIS FOR EACH NEWLY ADDED CUSTOMER. <<=======
     "match_criteria" : {
         "match_type" : "DRG_ATTACHMENT_ID",
         "attachment_type" : "VCN",
@@ -221,7 +225,6 @@ Specifically:
     }
 }
 ```
-**THESE CONFIGURATION SNIPPETS ARE SHOWN HERE FOR CLARITY PURPOSES. THEY ARE ALL ALREADY ADDED IN [network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json)**
 
 **MAKE SURE TO REPEAT STEPS 1 and 2 ABOVE FOR ANY NEWLY ADDED CUSTOMERS. UTILIZE AVAILABLE CUSTOMER 1 SAMPLE AS GUIDANCE.**
 
@@ -229,10 +232,10 @@ Specifically:
 
 In order to update the current network configuration, edit the existing network stack, replacing the existing Input Configuration File and Input Dependency Files with the files in the table below:
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
-[network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json) | iam/output/compartments_output.json, firewall/output/instances_output.json, customers/customer1/  | network/output/network_output.json
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
+[network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json, customer1/output/network_output.json  | network/output/network_output.json
 
 #### What Gets Deployed
 
-Routing is updated.
+Routing is updated, so that the customer VCN can route to the DRG and the DRG can route to the customer VCN.

@@ -6,14 +6,21 @@ It assembles bootstrap, IAM, governance, security and observability configuratio
 
 Management plane administrators.
 
-### Deployment Order
+### Deployment Sequence
 
-This is the very first stack to deploy.
+1. **Mgmt Plane Foundational - IAM, Logging, Governance (this stack)**
+2. [Mgmt Plane Networking 1st stage - Mgmt Plane VCNs](./MPLANE-NETWORKING.md#network-stack-1st-stage)
+3. [Mgmt Plane Networking - Firewall](./MPLANE-FIREWALL.md)
+4. [Mgmt Plane Networking 2nd stage - Network routing post firewall deployment](./MPLANE-NETWORKING.md#network-stack-2nd-stage)
+5. [Customer Onboarding](./CUSTOMER-ONBOARDING.md)
+6. [Mgmt Plane Networking 3rd stage - Network routing post customer onboarding](./MPLANE-NETWORKING.md#network-stack-3rd-stage)
+
+**Stacks #5 and #6 must be repeated for each NEW customer onboarding.**
 
 ### Stack Configuration
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
 [bootstrap.json](../mgmt-plane/bootstrap/bootstrap.json), [iam_config.json](../mgmt-plane/iam/iam_config.json), [budgets_config.json](../mgmt-plane/governance/budgets_config.json), [cloud_guard_config.json](../mgmt-plane/security/cloud_guard_config.json)\*, [security_zones_config.json](../mgmt-plane/security/security_zones_config.json), [scanning_config.json](../mgmt-plane/security/scanning_config.json), [observability_config.json](../mgmt-plane/observability/observability_config.json) | None | iam/output/compartments_output.json
 
 \* cloud_guard_config.json is not automatically included in the stack below. When creating the stack, add *https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/security/cloud_guard_config.json* to the set of configuration files only if a Cloud Guard target does not exist in the Root compartment.

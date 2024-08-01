@@ -6,14 +6,19 @@ The firewall stack deploys a pair of Palo Alto firewalls, *sandwiched* by a pair
 
 Management plane network administrators.
 
-### Deployment Order
+### Deployment Sequence
 
-This stack is executed after the initial deployment of the [Management Plane Network Stack](./MPLANE-NETWORKING.md#1st-stage).
+1. [Mgmt Plane Foundational - IAM, Logging, Governance](./MPLANE-FOUNDATIONAL.md)
+2. [Mgmt Plane Networking 1st stage - Mgmt Plane VCNs](./MPLANE-NETWORKING.md#network-stack-1st-stage)
+3. **Mgmt Plane Networking - Firewall (this stack)**
+4. [Mgmt Plane Networking 2nd stage - Network routing post firewall deployment](./MPLANE-NETWORKING.md#network-stack-2nd-stage)
+5. [Customer Onboarding](./CUSTOMER-ONBOARDING.md)
+6. [Mgmt Plane Networking 3rd stage - Network routing post customer onboarding](./MPLANE-NETWORKING.md#network-stack-3rd-stage)
 
 ### Stack Configuration
 
-Input Configuration Files | Input Dependency Files | Output
---------------------------|------------------------|-------
+Input Configuration Files | Input Dependency Files | Generated Output
+--------------------------|------------------------|------------------
 [firewall_config.json](../mgmt-plane/firewall/firewall_config.json) | iam/output/compartments_output.json, network/output/network_output.json  | firewall/output/instances_output.json
 
 ### Stack Creation
