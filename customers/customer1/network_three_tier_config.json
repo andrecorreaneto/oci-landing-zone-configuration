@@ -188,16 +188,16 @@
           },
   
           "non_vcn_specific_gateways" : {
-            "inject_into_existing_drg" : {
+            "inject_into_existing_drgs" : {
               "CUSTOMER-1-CENTRAL-HUB-DRG-INJECT" : {
                 "drg_id" : "CENTRAL-HUB-DRG",
                 "drg_attachments" : {
                   "CUSTOMER-1-THREE-TIER-VCN-ATTACH" : {
-                     "display_name" : "customer1-three-tier-vcn-attachment",
-                     "network_details" : {
-                       "attached_resource_key" : "THREE-TIER-VCN",
-                       "type" : "VCN"
-                     }
+                    "display_name" : "customer1-three-tier-vcn-attachment",
+                    "network_details" : {
+                      "attached_resource_key" : "THREE-TIER-VCN",
+                      "type" : "VCN"
+                    }
                   }
                 }
               }
