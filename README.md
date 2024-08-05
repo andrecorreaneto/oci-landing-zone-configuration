@@ -135,7 +135,7 @@ The following are executed for each new customer.
  5. [Customer Onboarding Stack](./docs/CUSTOMER-ONBOARDING.md)
  6. [Network Stack Post Customer Update](./docs/MPLANE-NETWORKING.md#stage3)
 
- The diagram below depicts the deployment sequencing, presented bottom-up. Note that the Network stack must be updated once after Firewall deployment and after each new customer onboarding.
+ The diagram below depicts the deployment sequencing. Note that the Network stack must be updated once after Firewall deployment and after each new customer onboarding.
 
  ![Deployment Sequencing](./images/deployment-sequencing.png)
 
