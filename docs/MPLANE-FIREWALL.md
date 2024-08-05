@@ -27,4 +27,6 @@ Input Configuration Files | Input Dependency Files | Generated Output
 
 ### What Gets Deployed
 
-![isv-pod-architecture-mgmt-plane-firewall](../images/isv-pod-architecture-mgmt-plane-firewall.png)
+The resources in red color are added.
+
+![isv-pod-architecture-mgmt-plane-firewall](../images/mgmt-plane-firewall.png)

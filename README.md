@@ -62,9 +62,9 @@ The network compartment (green) is designed to house the shared Virtual Cloud Ne
 
 **Subscriptions:**
 
-![SaaS-pod-architecture](images/SaaS-pod-architecture.png)
+![SaaS-pod-architecture](images/architecture.png)
 
-[Click here](./images/SaaS-pod-architecture.drawio) to download the drawio version.
+[Click here](./images/SaaS-pod-architecture_v2.drawio) to download the drawio version.
 
 ## Configuration Files
 

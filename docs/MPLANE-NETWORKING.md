@@ -35,8 +35,9 @@ Click the button to create the stack with all variables pre-filled.
 
 #### What Gets Deployed
 
-![isv-pod-architecture-mgmt-plane-network-initial](../images/isv-pod-architecture-mgmt-plane-network-initial.png)
+The resources in red color are added.
 
+![isv-pod-architecture-mgmt-plane-network-initial](../images/mgmt-plane-network-initial.png)
 
 
 ### <a name="2nd-stage">Network Stack 2nd Stage</a>
@@ -187,8 +188,9 @@ Input Configuration Files | Input Dependency Files | Generated Output
 
 #### What Gets Deployed
 
-![isv-pod-architecture-mgmt-plane-network-post-firewall](../images/isv-pod-architecture-mgmt-plane-network-post-firewall.png)
+The resources in red color are added.
 
+![isv-pod-architecture-mgmt-plane-network-post-firewall](../images/mgmt-plane-network-post-firewall.png)
 
 
 ### <a name="3rd-stage">Network Stack 3rd Stage</a>

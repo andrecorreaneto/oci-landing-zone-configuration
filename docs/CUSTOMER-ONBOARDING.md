@@ -27,4 +27,6 @@ Input Configuration Files | Input Dependency Files | Generated Output
 
 ### What Gets Deployed
 
-![isv-pod-architecture-customer-1](../images/isv-pod-architecture-customer-1.png)
+The resources in red color are added.
+
+![isv-pod-architecture-customer-1](../images/customer1.png)
