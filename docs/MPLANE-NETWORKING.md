@@ -19,19 +19,19 @@ This stack is executed in different stages with a **PROGRESSIVELY UPDATED single
 
 **Stacks #5 and #6 must be repeated for each NEW customer onboarding.**
 
-### <a name="1st-stage">Network Stack 1st Stage</a> 
+### <a name="stage1">Network Stack 1st Stage</a> 
 
 #### Stack Configuration
 
 Input Configuration Files | Input Dependency Files | Generated Output
 --------------------------|------------------------|------------------
-[network_initial_config.json](../mgmt-plane/network/network_initial_config.json) | iam/output/compartments_output.json | network/output/network_output.json
+[network_initial_config.json](../mgmt-plane/network/network_initial_config.json), [flow_logs_config.json](../mgmt-plane/network/flow_logs_config.json) | iam/output/compartments_output.json | network/output/network_output.json
 
 #### Stack Creation
 
 Click the button to create the stack with all variables pre-filled.
 
-[![Deploy_To_OCI](../images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/main.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/network/network_initial_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json","save_output":true,"oci_object_prefix":"network/output"})
+[![Deploy_To_OCI](../images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-landing-zones-orchestrator/archive/refs/heads/main.zip&zipUrlVariables={"input_config_files_urls":"https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/network/network_initial_config.json,https://raw.githubusercontent.com/andrecorreaneto/oci-landing-zone-configuration/test/mgmt-plane/network/flow_logs_config.json","url_dependency_source_oci_bucket":"isv-terraform-runtime-bucket","url_dependency_source":"ocibucket","url_dependency_source_oci_objects":"iam/output/compartments_output.json","save_output":true,"oci_object_prefix":"network/output"})
 
 #### What Gets Deployed
 
@@ -40,7 +40,7 @@ The resources in red color are added.
 ![isv-pod-architecture-mgmt-plane-network-initial](../images/mgmt-plane-network-initial.png)
 
 
-### <a name="2nd-stage">Network Stack 2nd Stage</a>
+### <a name="stage2">Network Stack 2nd Stage</a>
 
 **THE 2ND STAGE IS NOT A NEW STACK, BUT AN UPDATE TO NETWORK STACK INITIAL DEPLOYMENT, NOW INCLUDING THE CONFIGURATIONS DEPLOYED BY THE NETWORK FIREWALL STACK.**
 
@@ -184,7 +184,7 @@ In order to update the initial network configuration, edit the existing network 
 
 Input Configuration Files | Input Dependency Files | Generated Output
 --------------------------|------------------------|------------------
-[network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json  | network/output/network_output.json
+[network_post_firewall_config.json](../mgmt-plane/network/network_post_firewall_config.json), [flow_logs_config.json](../mgmt-plane/network/flow_logs_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json  | network/output/network_output.json
 
 #### What Gets Deployed
 
@@ -193,7 +193,7 @@ The resources in red color are added.
 ![isv-pod-architecture-mgmt-plane-network-post-firewall](../images/mgmt-plane-network-post-firewall.png)
 
 
-### <a name="3rd-stage">Network Stack 3rd Stage</a>
+### <a name="stage3">Network Stack 3rd Stage</a>
 
 **THE 3RD STAGE IS NOT A NEW STACK, BUT AN UPDATE TO THE NETWORK STACK AFTER EACH CUSTOMER ONBOARDING INITIATION.**
 
@@ -236,7 +236,7 @@ In order to update the current network configuration, edit the existing network 
 
 Input Configuration Files | Input Dependency Files | Generated Output
 --------------------------|------------------------|------------------
-[network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json, customer1/output/network_output.json  | network/output/network_output.json
+[network_post_each_customer_config.json](../mgmt-plane/network/network_post_each_customer_config.json), [flow_logs_config.json](../mgmt-plane/network/flow_logs_config.json) | iam/output/compartments_output.json, firewall/output/nlbs_output.json, customer1/output/network_output.json  | network/output/network_output.json
 
 #### What Gets Deployed
 

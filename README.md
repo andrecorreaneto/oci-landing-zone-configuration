@@ -125,15 +125,15 @@ Next we show how to deploy the blueprint with the Orchestrator per the stacks de
 #### Management Plane
 The following stacks are executed once each. After stack #4, the management plane network is ready to onboard customers.
  1. [Foundational Stack](./docs/MPLANE-FOUNDATIONAL.md)
- 2. [Network Stack](./docs/MPLANE-NETWORKING.md)
+ 2. [Network Stack](./docs/MPLANE-NETWORKING.md#stage1)
  3. [Firewall Stack](./docs/MPLANE-FIREWALL.md)
- 4. [Network Stack Post Firewall Update](./docs/MPLANE-NETWORKING.md#2nd-stage)
+ 4. [Network Stack Post Firewall Update](./docs/MPLANE-NETWORKING.md#stage2)
 
 #### Customer Onboarding
 The following are executed for each new customer.
 
  5. [Customer Onboarding Stack](./docs/CUSTOMER-ONBOARDING.md)
- 6. [Network Stack Post Customer Update](./docs/MPLANE-NETWORKING.md#3rd-stage)
+ 6. [Network Stack Post Customer Update](./docs/MPLANE-NETWORKING.md#stage3)
 
  The diagram below depicts the deployment sequencing, presented bottom-up. Note that the Network stack must be updated once after Firewall deployment and after each new customer onboarding.
 

@@ -9,11 +9,11 @@ Customers administrators.
 ### Deployment Sequence
 
 1. [Mgmt Plane Foundational - IAM, Logging, Governance](./MPLANE-FOUNDATIONAL.md)
-2. [Mgmt Plane Networking 1st stage - Mgmt Plane VCNs](./MPLANE-NETWORKING.md#network-stack-1st-stage)
+2. [Mgmt Plane Networking 1st stage - Mgmt Plane VCNs](./MPLANE-NETWORKING.md#stage1)
 3. [Mgmt Plane Networking - Firewall](./MPLANE-FIREWALL.md)
-4. [Mgmt Plane Networking 2nd stage - Network routing post firewall deployment](./MPLANE-NETWORKING.md#network-stack-2nd-stage)
+4. [Mgmt Plane Networking 2nd stage - Network routing post firewall deployment](./MPLANE-NETWORKING.md#stage2)
 5. **Customer Onboarding (this stack)**
-6. [Mgmt Plane Networking 3rd stage - Network routing post customer onboarding](./MPLANE-NETWORKING.md#network-stack-3rd-stage)
+6. [Mgmt Plane Networking 3rd stage - Network routing post customer onboarding](./MPLANE-NETWORKING.md#stage3)
 
 ### Stack Configuration
 
