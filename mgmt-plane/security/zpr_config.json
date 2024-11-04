@@ -1,0 +1,31 @@
+{
+  "zpr_configuration" : {
+    "namespaces" : {
+      "ZPR-VISION-NAMESPACE" : {
+        "compartment_id" : "ocid1.tenancy.oc1..aaaaaaaahbsqqoq6hngruus5z4e3zclij32obawvlsxsrz4culbvq5k5p2ia",
+        "description" : "Vision ZPR Security Attribute Namespace",
+        "name" : "zpr-vision-namespace"
+      }
+    },
+    "security_attributes" : {
+      "SECURITY-ATTRIBUTE-APP" : {
+        "description" : "Security attribute for zpr-vision-namespace applications",
+        "name" : "app-security-attribute",
+        "namespace_id" : "ZPR-VISION-NAMESPACE" ,
+        "validator_type" : "ENUM",
+        "validator_values" : ["hr-app", "payroll-app", "benefits-app"]
+      },
+      "SECURITY-ATTRIBUTE-DEFAULT" : {
+        "description" : "Security attribute for default Oracle-ZPR namespace",
+        "name" : "default-security-attribute"
+      }
+    },
+    "zpr_policies" : {
+      "ZPR-POLICY-1" : {
+        "description" : "ZPR policy",
+        "name" : "zpr-policy-1",
+        "statements" : ["in zpr-vision-namespace.app-security-attribute:hr-app VCN allow zpr-vision-namespace.app-security-attribute:hr-app endpoints to connect to 'osn-services-ip-addresses'"]
+      }
+    }
+  }
+}  
